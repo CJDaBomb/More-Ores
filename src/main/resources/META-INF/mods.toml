@@ -1,0 +1,15 @@
+
+modLoader="javafml"
+loaderVersion="[35,)"
+license="Creative Commons"
+issueTrackerURL="https://github.com/CJDaBomb/More-Ores/issues"
+[[mods]]
+modId="moreores"
+version="1.0"
+displayName="More Ores"
+displayURL="https://github.com/CJDaBomb/More-Ores"
+logoFile="logo.png"
+authors="CJDaBomb"
+description='''
+A mod that adds new ores into the game with functionalities for each type.
+'''
