@@ -44,7 +44,7 @@ public class ItemInit {
 
 	public static final RegistryObject<BlockItem> ALEXANDRITE_BLOCK = ITEMS.register("alexandrite_block",
 			() -> new BlockItem(BlockInit.ALEXANDRITE_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
-	public static final RegistryObject<BlockItem> ALUMINIUM_BLOCK = ITEMS.register("aluminu_block",
+	public static final RegistryObject<BlockItem> ALUMINIUM_BLOCK = ITEMS.register("aluminium_block",
 			() -> new BlockItem(BlockInit.ALUMINIUM_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<BlockItem> COBALT_BLOCK = ITEMS.register("cobalt_block",
 			() -> new BlockItem(BlockInit.COBALT_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
@@ -90,8 +90,8 @@ public class ItemInit {
 			() -> new BlockItem(BlockInit.SHADOW_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<BlockItem> SILVER_ORE = ITEMS.register("silver_ore",
 			() -> new BlockItem(BlockInit.SILVER_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
-	public static final RegistryObject<BlockItem> ORE = ITEMS.register("sunstone_ore",
-			() -> new BlockItem(BlockInit.SUNSTONE_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
+	public static final RegistryObject<BlockItem> SUNSTONE_ORE = ITEMS.register("sunstone_ore",
+			() -> new BlockItem(BlockInit.SUNSTONE_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<BlockItem> TURQUOISE_ORE = ITEMS.register("turquoise_ore",
 			() -> new BlockItem(BlockInit.TURQUOISE_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 

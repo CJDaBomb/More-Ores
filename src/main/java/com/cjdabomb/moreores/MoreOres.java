@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.cjdabomb.moreores.core.init.BlockInit;
 import com.cjdabomb.moreores.core.init.ItemInit;
+import com.cjdabomb.moreores.registries.VillagerProfessionsRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +27,8 @@ public class MoreOres
         
         ItemInit.ITEMS.register(bus);
         BlockInit.BLOCKS.register(bus);
+        VillagerProfessionsRegistry.PROFESSIONS.register(bus);
+		VillagerProfessionsRegistry.POINTS_OF_INTEREST.register(bus);
         
         MinecraftForge.EVENT_BUS.register(this);
     }

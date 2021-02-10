@@ -2,7 +2,7 @@
 	"item.moreores.rose_quartz": "Rose Quartz",
 	"item.moreores.jasper": "Jasper",
 	"item.moreores.alexandrite": "Alexandrite",
-	"item.moreores.aluminum_ingot": "Aluminum Ingot",
+	"item.moreores.aluminium_ingot": "Aluminium Ingot",
 	"item.moreores.cobalt_ingot": "Cobalt Ingot",
 	"item.moreores.rose_gold_ingot": "Rose Gold Ingot",
 	"item.moreores.shadow_ingot": "Shadow Ingot",
@@ -14,8 +14,8 @@
 	
 	"block.moreores.alexandrite_block": "Block of Alexandrite",
     "block.moreores.alexandrite_ore": "Alexandrite Ore",
-	"block.moreores.aluminum_block": "Block of Aluminum",
-	"block.moreores.aluminum_ore": "Aluminum Ore",
+	"block.moreores.aluminium_block": "Block of Aluminium",
+	"block.moreores.aluminium_ore": "Aluminium Ore",
 	"block.moreores.cobalt_block": "Cobalt Block",
 	"block.moreores.cobalt_ore": "Cobalt Ore",
 	"block.moreores.electrum_block": "Block of Electrum",
@@ -36,5 +36,5 @@
 	"block.moreores.sunstone_ore": "Sunstone Ore",
 	"block.moreores.turquoise_block": "Block of Turquoise",
 	"block.moreores.turquoise_ore": "Turquoise Ore",
-	"block.moreore.diamond_lantern": "Diamond Lantern"
+	"block.moreores.diamond_lantern": "Diamond Lantern"
 }
