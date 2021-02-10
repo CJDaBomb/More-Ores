@@ -1,10 +1,12 @@
 package com.cjdabomb.moreores.core.init;
 
 import com.cjdabomb.moreores.MoreOres;
+import com.cjdabomb.moreores.common.items.DiamondChorusFruitItem;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,7 +30,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> ROSE_GOLD_INGOT = ITEMS.register("rose_gold_ingot",
 			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> SHADOW_INGOT = ITEMS.register("shadow_ingot",
-			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+			() -> new Item(new Item.Properties().group(ItemGroup.MISC).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> SUNSTONE = ITEMS.register("sunstone",
 			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> TURQUOISE = ITEMS.register("turquoise",
@@ -39,6 +41,9 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
 			() -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+	
+	public static final RegistryObject<DiamondChorusFruitItem> DIAMOND_CHORUS_FRUIT = ITEMS.register("diamond_chorus_fruit", 
+			() -> new DiamondChorusFruitItem(new Item.Properties().group(ItemGroup.MISC)));
 
 	// Block Items
 
@@ -87,7 +92,7 @@ public class ItemInit {
 	public static final RegistryObject<BlockItem> SAPPHIRE_BRE = ITEMS.register("sapphire_ore",
 			() -> new BlockItem(BlockInit.SAPPHIRE_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<BlockItem> SHADOW_ORE = ITEMS.register("shadow_ore",
-			() -> new BlockItem(BlockInit.SHADOW_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
+			() -> new BlockItem(BlockInit.SHADOW_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS).rarity(Rarity.RARE)));
 	public static final RegistryObject<BlockItem> SILVER_ORE = ITEMS.register("silver_ore",
 			() -> new BlockItem(BlockInit.SILVER_ORE.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<BlockItem> SUNSTONE_ORE = ITEMS.register("sunstone_ore",
