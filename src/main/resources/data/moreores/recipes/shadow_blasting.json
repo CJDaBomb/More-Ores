@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "moreores:shadow_ore"
+    },
+    "result": "moreores:shadow_ingot",
+    "experience": 5,
+    "cookingtime": 140
+}

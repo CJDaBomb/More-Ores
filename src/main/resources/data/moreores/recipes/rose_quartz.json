@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:rose_quartz_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:rose_quartz",
+        "count": 9
+    }
+}

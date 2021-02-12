@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "moreores:turquoise_ore"
+    },
+    "result": "moreores:turquoise",
+    "experience": 5,
+    "cookingtime": 140
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ggg",
+        "gAg",
+        "ggg"
+    ],
+    "key": {
+        "g": {
+            "item": "moreores:turquoise"
+        },
+        "A": {
+            "item": "minecraft:apple"
+        }
+    },
+    "result": {
+        "item": "moreores:turquoise_apple",
+        "count": 1
+    }
+}

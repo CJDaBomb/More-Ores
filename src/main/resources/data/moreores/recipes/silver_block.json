@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "moreores:silver_ingot"
+        }
+    },
+    "result": {
+        "item": "moreores:silver_block",
+        "count": 1
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "moreores:sunstone_ore"
+    },
+    "result": "moreores:sunstone",
+    "experience": 5,
+    "cookingtime": 140
+}

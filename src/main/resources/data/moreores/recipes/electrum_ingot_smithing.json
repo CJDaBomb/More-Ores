@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:gold_ingot"
+    },
+    "addition": {
+        "item": "moreores:silver_ingot"
+    },
+    "result": {
+        "item": "moreores:electrum_ingot"
+    }
+}

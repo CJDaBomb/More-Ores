@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "moreores:jasper_ore"
+    },
+    "result": "moreores:jasper",
+    "experience": 5,
+    "cookingtime": 200
+}

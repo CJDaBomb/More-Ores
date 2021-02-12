@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:silver_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:silver_ingot",
+        "count": 9
+    }
+}

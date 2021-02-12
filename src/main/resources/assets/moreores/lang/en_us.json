@@ -12,6 +12,21 @@
 	"item.moreores.electrum_ingot": "Electrum Ingot",
 	"item.moreores.sapphire": "Sapphire",
 	"item.moreores.diamond_chorus_fruit": "§1Diamond Chorus Fruit",
+	"item.moreores.bluberry": "Blueberries",
+	"item.moreores.cherry": "Cherries",
+	"item.moreores.grape": "Grapes",
+	"item.moreores.lemon": "Lemons",
+	"item.moreores.alexandrite_apple": "§bAlexandrite Apple",
+	"item.moreores.aluminium_apple": "§fAluminium Apple",
+	"item.moreores.coal_apple": "Coal Apple",
+	"item.moreores.diamond_apple": "§bDiamond Apple",
+	"item.moreores.emerald_apple": "§aEmerald Apple",
+	"item.moreores.iron_apple": "§fIron Apple",
+	"item.moreores.lapis_apple": "§9Lapis Apple",
+	"item.moreores.redstone_apple": "§4 Redstone Apple",
+	"item.moreores.shadow_apple": "§0Shadow Apple",
+	"item.moreores.turquoise_apple": "§3Turquoise Apple",
+	
 	
 	"block.moreores.alexandrite_block": "Block of Alexandrite",
     "block.moreores.alexandrite_ore": "Alexandrite Ore",
@@ -20,11 +35,9 @@
 	"block.moreores.cobalt_block": "Cobalt Block",
 	"block.moreores.cobalt_ore": "Cobalt Ore",
 	"block.moreores.electrum_block": "Block of Electrum",
-	"block.moreores.electrum_ore": "Electrum Ore",
 	"block.moreores.jasper_block": "Block of Jasper",
 	"block.moreores.jasper_ore": "Jasper Ore",
 	"block.moreores.rose_gold_block": "Rose Gold Block",
-	"block.moreores.rose_gold_ore": "Rose Gold Ore",
 	"block.moreores.rose_quartz_block": "Rose Quartz Block",
 	"block.moreores.rose_quartz_ore": "Rose Quartz Ore",
 	"block.moreores.sapphire_block": "Block of Sapphire",
@@ -37,5 +50,9 @@
 	"block.moreores.sunstone_ore": "Sunstone Ore",
 	"block.moreores.turquoise_block": "Block of Turquoise",
 	"block.moreores.turquoise_ore": "Turquoise Ore",
-	"block.moreores.diamond_lantern": "Diamond Lantern"
+	"block.moreores.diamond_lantern": "Diamond Lantern",
+	
+	"itemGroup.more_ores_items": "More Ores Items",
+	"itemGroup.more_ores_blocks": "More Ores Blocks",
+	"itemGroup.more_ores_tools": "More Ores Tools"
 }

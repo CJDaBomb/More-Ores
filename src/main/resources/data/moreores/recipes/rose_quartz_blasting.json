@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "moreores:rose_quartz_ore"
+    },
+    "result": "moreores:rose_quartz",
+    "experience": 5,
+    "cookingtime": 140
+}

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "moreores:electrum_ingot"
+        }
+    },
+    "result": {
+        "item": "moreores:electrum_block",
+        "count": 1
+    }
+}

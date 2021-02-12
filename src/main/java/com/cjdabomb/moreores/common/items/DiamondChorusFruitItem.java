@@ -7,8 +7,6 @@ import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -17,7 +15,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class DiamondChorusFruitItem extends Item{
+public class DiamondChorusFruitItem extends Item {
 
 	public DiamondChorusFruitItem(Item.Properties builder) {
 		super(builder);
@@ -58,8 +56,6 @@ public class DiamondChorusFruitItem extends Item{
 	   }
 	
 	public ActionResult<ItemStack> onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft, LivingEntity playerIn, Hand handIn) {
-		playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 1));
-		playerIn.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 1200, 4));
 		
 	if(random.nextFloat() < .05f) {	
 		EndermiteEntity entity = new EndermiteEntity(null, worldIn);

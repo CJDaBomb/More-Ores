@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:electrum_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:electrum_ingot",
+        "count": 9
+    }
+}

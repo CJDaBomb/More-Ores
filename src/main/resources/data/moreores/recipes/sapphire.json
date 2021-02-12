@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:sapphire_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:sapphire",
+        "count": 9
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:jasper_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:jasper",
+        "count": 9
+    }
+}

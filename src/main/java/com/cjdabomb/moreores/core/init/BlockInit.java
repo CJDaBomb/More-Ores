@@ -66,13 +66,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> COBALT_ORE = BLOCKS.register("cobalt_ore",
 			() -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(4).sound(SoundType.STONE).setRequiresTool()));
-	public static final RegistryObject<Block> ELECTRUM_ORE = BLOCKS.register("electrum_ore",
-			() -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)
-					.harvestTool(ToolType.PICKAXE).harvestLevel(4).sound(SoundType.STONE).setRequiresTool()));
 	public static final RegistryObject<Block> JASPER_ORE = BLOCKS.register("jasper_ore",
-			() -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)
-					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
-	public static final RegistryObject<Block> ROSE_GOLD_ORE = BLOCKS.register("rose_gold_ore",
 			() -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
 	public static final RegistryObject<Block> ROSE_QUARTZ_ORE = BLOCKS.register("rose_quartz_ore",

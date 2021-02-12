@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "moreores:sunstone_block"
+        }
+    ],
+    "result": {
+        "item": "moreores:sunstone",
+        "count": 9
+    }
+}

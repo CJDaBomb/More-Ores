@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "moreores:sapphire"
+        }
+    },
+    "result": {
+        "item": "moreores:sapphire_block",
+        "count": 1
+    }
+}

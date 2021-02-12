@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "moreores:alexandrite_ore"
+    },
+    "result": "moreores:alexandrite",
+    "experience": 5,
+    "cookingtime": 200
+}

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "moreores:alexandrite"
+        }
+    },
+    "result": {
+        "item": "moreores:alexandrite_block",
+        "count": 1
+    }
+}
