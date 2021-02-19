@@ -23,7 +23,7 @@ public class VillagerProfessionsRegistry {
 	
 	
     public static final RegistryObject<VillagerProfession> JEWELER = PROFESSIONS.register("jeweler",
-            () -> new VillagerProfession("jewler",
+            () -> new VillagerProfession("jeweler",
             	    JEWELER_POI, 
               		ImmutableSet.of(),
             		ImmutableSet.of(),

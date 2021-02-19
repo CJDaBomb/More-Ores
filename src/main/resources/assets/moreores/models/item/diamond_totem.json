@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
     "textures": {
-    	"layer0": "moreores:items/aluminum_ingot"   
+    	"layer0": "moreores:items/diamond_totem"   
     }
 }

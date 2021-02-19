@@ -57,7 +57,7 @@ public class DiamondChorusFruitItem extends Item {
 	
 	public ActionResult<ItemStack> onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft, LivingEntity playerIn, Hand handIn) {
 		
-	if(random.nextFloat() < .05f) {	
+	if(random.nextFloat() < .1f) {	
 		EndermiteEntity entity = new EndermiteEntity(null, worldIn);
         entity.setPosition(playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosX());
         worldIn.addEntity(entity);

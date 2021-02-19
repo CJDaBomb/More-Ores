@@ -1,6 +1,8 @@
 package com.cjdabomb.moreores.core.init;
 
 import com.cjdabomb.moreores.MoreOres;
+import com.cjdabomb.moreores.common.blocks.DarkMatterBlock;
+import com.cjdabomb.moreores.common.blocks.JewelerBarrelBlock;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -27,7 +29,7 @@ public class BlockInit {
 					.harvestTool(ToolType.PICKAXE).harvestLevel(4).sound(SoundType.METAL).setRequiresTool()));
 	public static final RegistryObject<Block> ELECTRUM_BLOCK = BLOCKS.register("electrum_block",
 			() -> new Block(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F)
-					.harvestTool(ToolType.PICKAXE).harvestLevel(4).sound(SoundType.METAL).setRequiresTool()));
+					.harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.METAL).setRequiresTool()));
 	public static final RegistryObject<Block> JASPER_BLOCK = BLOCKS.register("jasper_block",
 			() -> new Block(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL).setRequiresTool()));
@@ -51,11 +53,17 @@ public class BlockInit {
 					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL).setRequiresTool()));
 	public static final RegistryObject<Block> TURQUOISE_BLOCK = BLOCKS.register("turquoise_block",
 			() -> new Block(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F)
-					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL).setRequiresTool()));
-
+					.harvestLevel(2).sound(SoundType.METAL)));
+	
+	public static final RegistryObject<JewelerBarrelBlock> JEWELER_BARREL = BLOCKS.register("jeweler_barrel", 
+		 () -> new JewelerBarrelBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(4, 4)
+				 .harvestTool(ToolType.AXE).harvestLevel(0).sound(SoundType.WOOD).setRequiresTool()));
 	public static final RegistryObject<Block> DIAMOND_LANTERN = BLOCKS.register("diamond_lantern", 	
-			() -> new Block(AbstractBlock.Properties.create(Material.GLASS).hardnessAndResistance(0.3F, 0.3F)
-					.sound(SoundType.GLASS).setRequiresTool()));
+			() -> new Block(AbstractBlock.Properties.create(Material.GLASS).hardnessAndResistance(0.6F, 0.6F)
+					.harvestTool(ToolType.PICKAXE).harvestLevel(1).sound(SoundType.GLASS).setRequiresTool()));
+	
+	public static final RegistryObject<DarkMatterBlock> DARK_MATTER = BLOCKS.register("dark_matter", 
+			() -> new DarkMatterBlock(AbstractBlock.Properties.create(Material.TNT).zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
 	public static final RegistryObject<Block> ALEXANDRITE_ORE = BLOCKS.register("alexandrite_ore",
 			() -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)

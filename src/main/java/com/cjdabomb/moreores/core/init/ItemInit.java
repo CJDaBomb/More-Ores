@@ -3,13 +3,19 @@ package com.cjdabomb.moreores.core.init;
 import com.cjdabomb.moreores.MoreOres;
 import com.cjdabomb.moreores.common.items.DiamondAppleItem;
 import com.cjdabomb.moreores.common.items.DiamondChorusFruitItem;
+import com.cjdabomb.moreores.common.items.DiamondTotem;
+import com.cjdabomb.moreores.common.items.ElectrumIngotItem;
+import com.cjdabomb.moreores.common.items.EmeraldTotem;
 import com.cjdabomb.moreores.common.items.LapisAppleItem;
 import com.cjdabomb.moreores.common.items.RedstoneAppleItem;
 import com.cjdabomb.moreores.common.items.ShadowAppleItem;
+import com.cjdabomb.moreores.common.items.SilverIngotItem;
+import com.cjdabomb.moreores.common.items.VoidElytraItem;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -41,12 +47,16 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
 	public static final RegistryObject<Item> TURQUOISE = ITEMS.register("turquoise",
 			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
-	public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("silver_ingot",
-			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
-	public static final RegistryObject<Item> ELECTRUM_INGOT = ITEMS.register("electrum_ingot",
-			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
+	public static final RegistryObject<SilverIngotItem> SILVER_INGOT = ITEMS.register("silver_ingot",
+			() -> new SilverIngotItem(new Item.Properties().group(MoreOres.ITEMS)));
+	public static final RegistryObject<ElectrumIngotItem> ELECTRUM_INGOT = ITEMS.register("electrum_ingot",
+			() -> new ElectrumIngotItem(new Item.Properties().group(MoreOres.ITEMS)));
 	public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
 			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
+	
+	public static final RegistryObject<VoidElytraItem> VOID_ELYTRA = ITEMS.register("void_elytra", 
+			() -> new VoidElytraItem(new Item.Properties()
+					.group(ItemGroup.TRANSPORTATION).maxDamage(556)));
 	
 	
 	public static final RegistryObject<Item> BLUEBERRIES = ITEMS.register("blueberry", () -> new Item(new Item.Properties().group(MoreOres.ITEMS)
@@ -101,7 +111,7 @@ public class ItemInit {
 					.effect(() -> new EffectInstance(Effects.NIGHT_VISION, 7200, 1), 1.0f).hunger(4).setAlwaysEdible().saturation(1.2f).build())));
 	
 	public static final RegistryObject<ShadowAppleItem> SHADOW_APPLE = ITEMS.register("shadow_apple", 
-			() -> new ShadowAppleItem(new Item.Properties().group(MoreOres.ITEMS).rarity(Rarity.RARE).food(new Food.Builder()
+			() -> new ShadowAppleItem(new Item.Properties().group(MoreOres.ITEMS).food(new Food.Builder()
 					.effect(() -> new EffectInstance(Effects.REGENERATION, 1200, 1), 1.0f).effect(() -> new EffectInstance(Effects.ABSORPTION, 12000, 2), 1.0f)
 					.effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 9600, 1), 1.0f).effect(() -> new EffectInstance(Effects.SPEED, 9600, 2), 1.0f)
 					.effect(() -> new EffectInstance(Effects.INVISIBILITY, 19200, 1), 1.0f).effect(() -> new EffectInstance(Effects.STRENGTH, 12000, 2), 1.0f)
@@ -113,6 +123,10 @@ public class ItemInit {
 					.effect(() -> new EffectInstance(Effects.SPEED, 4800, 2), 1.0f).effect(() -> new EffectInstance(Effects.CONDUIT_POWER, 9600, 2), 1.0f)
 					.hunger(4).setAlwaysEdible().saturation(1.2f).build())));
 	
+	public static final RegistryObject<DiamondTotem> DIAMOND_TOTEM = ITEMS.register("diamond_totem", 
+			() -> new DiamondTotem(new Item.Properties().group(MoreOres.ITEMS).maxStackSize(1)));
+	public static final RegistryObject<EmeraldTotem> EMERALD_TOTEM = ITEMS.register("emerald_totem", 
+			() -> new EmeraldTotem(new Item.Properties().group(MoreOres.ITEMS).maxStackSize(1)));
 	
 	
 
@@ -142,9 +156,13 @@ public class ItemInit {
 			() -> new BlockItem(BlockInit.SUNSTONE_BLOCK.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 	public static final RegistryObject<BlockItem> TURQUOISE_BLOCK = ITEMS.register("turquoise_block",
 			() -> new BlockItem(BlockInit.TURQUOISE_BLOCK.get(), new Item.Properties().group(MoreOres.BLOCKS)));
-
+	
+	public static final RegistryObject<BlockItem> JEWELER_BARREL = ITEMS.register("jeweler_barrel", 
+			() -> new BlockItem(BlockInit.JEWELER_BARREL.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 	public static final RegistryObject<BlockItem> DIAMOND_LANTERN = ITEMS.register("diamond_lantern",
 			() -> new BlockItem(BlockInit.DIAMOND_LANTERN.get(), new Item.Properties().group(MoreOres.BLOCKS)));
+	public static final RegistryObject<BlockItem> DARK_MATTER = ITEMS.register("dark_matter", 
+			() -> new BlockItem(BlockInit.DARK_MATTER.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 
 	public static final RegistryObject<BlockItem> ALEXANDRITE_ORE = ITEMS.register("alexandrite_ore",
 			() -> new BlockItem(BlockInit.ALEXANDRITE_ORE.get(), new Item.Properties().group(MoreOres.BLOCKS)));

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "moreores:silver_ingot",
+    "moreores:silver_block",
+    "moreores:electrum_ingot",
+    "moreores:electrum_block",
+    "moreores:rose_gold_ingot",
+    "moreores:rose_gold_block"
+  ]
+}

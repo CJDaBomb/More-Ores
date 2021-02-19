@@ -34,9 +34,9 @@ public class OreGeneration {
 		   
 		}
 		else if(event.getCategory().equals(Biome.Category.NETHER)) {
-			generateOre(event.getGeneration(), OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, 
+			generateOre(event.getGeneration(), OreFeatureConfig.FillerBlockType.BASE_STONE_NETHER, 
 					   BlockInit.ROSE_QUARTZ_ORE.get().getDefaultState(), 6, 5, 64, 10);
-			generateOre(event.getGeneration(), OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, 
+			generateOre(event.getGeneration(), OreFeatureConfig.FillerBlockType.BASE_STONE_NETHER, 
 					   BlockInit.SUNSTONE_ORE.get().getDefaultState(), 10, 5, 128, 16);
 			
 		}

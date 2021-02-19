@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "moreores:blocks/jeweler_barrel_top",
+    "bottom": "moreores:blocks/jeweler_barrel_bottom",
+    "side": "moreores:blocks/jeweler_barrel_side"
+  }
+}
