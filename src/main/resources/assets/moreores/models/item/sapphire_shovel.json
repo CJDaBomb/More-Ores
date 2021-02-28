@@ -1,0 +1,8 @@
+{
+	"parent": "item/generated",
+    "textures": {
+    	"layer0": "moreores:items/sapphire_shovel",
+    	"layer1": "moreores:items/iron_rod",
+    	"layer2": "moreores:items/iron_tip"     
+    }
+}

@@ -1,4 +1,4 @@
-package com.cjdabomb.moreores.registries;
+package com.cjdabomb.moreores.core.init;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;

@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+    "textures": {
+    	"layer0": "moreores:items/silver_pickaxe",
+    	"layer1": "moreores:items/iron_rod"    
+    }
+}

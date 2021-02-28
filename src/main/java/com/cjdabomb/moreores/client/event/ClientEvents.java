@@ -8,5 +8,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @EventBusSubscriber(modid = MoreOres.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 public class ClientEvents {
+	
 
 }

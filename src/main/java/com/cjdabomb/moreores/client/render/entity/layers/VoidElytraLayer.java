@@ -10,27 +10,34 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.ElytraModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
-public class VoidElytraLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
-	private static final ResourceLocation TEXTURE_VOID_ELYTRA = new ResourceLocation("textures/entity/void_elytra.png");
+
+public class VoidElytraLayer<T extends LivingEntity, M extends BipedModel<T>> extends LayerRenderer<T, M> {
+	
+
+
+	public VoidElytraLayer(IEntityRenderer<T, M> entityRendererIn) {
+		super(entityRendererIn);
+		// TODO Auto-generated constructor stub
+	}
+
+
+	private static final ResourceLocation TEXTURE_VOID_ELYTRA = new ResourceLocation("moreores:textures/entities/void_elytra.png");
 	private final ElytraModel<T> modelVoidElytra = new ElytraModel<>();
 	
-	public VoidElytraLayer(IEntityRenderer<T, M> rendererIn) {
-	      super(rendererIn);
-	   }
-
-	   public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	
+	
+	
+	@Override
+	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 	      ItemStack itemstack = entitylivingbaseIn.getItemStackFromSlot(EquipmentSlotType.CHEST);
 	      if (shouldRender(itemstack, entitylivingbaseIn)) {
 	         ResourceLocation resourcelocation;

@@ -4,8 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cjdabomb.moreores.core.init.BlockInit;
+import com.cjdabomb.moreores.core.init.ContainerTypeInit;
+import com.cjdabomb.moreores.core.init.EntityTypeInit;
 import com.cjdabomb.moreores.core.init.ItemInit;
-import com.cjdabomb.moreores.registries.VillagerProfessionsRegistry;
+import com.cjdabomb.moreores.core.init.TileEntityTypeInit;
+import com.cjdabomb.moreores.villager.PointOfInterestTypes;
+import com.cjdabomb.moreores.villager.VillagerUtil;
 import com.cjdabomb.moreores.world.OreGeneration;
 
 import net.minecraft.item.ItemGroup;
@@ -34,18 +38,22 @@ public class MoreOres
         
         ItemInit.ITEMS.register(bus);
         BlockInit.BLOCKS.register(bus);
+        EntityTypeInit.ENTITIES.register(bus);
+        TileEntityTypeInit.TILE_ENTITIES.register(bus);
+        ContainerTypeInit.CONTAINERS.register(bus);
         
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::generateOres);
-        
-        VillagerProfessionsRegistry.PROFESSIONS.register(bus);
-		VillagerProfessionsRegistry.POINTS_OF_INTEREST.register(bus);
         
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-    
-    }
+	private void setup(final FMLCommonSetupEvent event) {	
+		
+		VillagerUtil.fixPOITypeBlockStates(PointOfInterestTypes.JEWELER);
+		 
+	       
+		
+	}
     
     public static class  MoreOresItemGroup extends ItemGroup {
 

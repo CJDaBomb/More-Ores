@@ -11,12 +11,17 @@ import com.cjdabomb.moreores.common.items.RedstoneAppleItem;
 import com.cjdabomb.moreores.common.items.ShadowAppleItem;
 import com.cjdabomb.moreores.common.items.SilverIngotItem;
 import com.cjdabomb.moreores.common.items.VoidElytraItem;
+import com.cjdabomb.moreores.core.enums.ModItemTier;
 
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
@@ -54,10 +59,18 @@ public class ItemInit {
 	public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
 			() -> new Item(new Item.Properties().group(MoreOres.ITEMS)));
 	
+
+	
+	
 	public static final RegistryObject<VoidElytraItem> VOID_ELYTRA = ITEMS.register("void_elytra", 
 			() -> new VoidElytraItem(new Item.Properties()
 					.group(ItemGroup.TRANSPORTATION).maxDamage(556)));
 	
+	
+	
+	
+	
+	// Food
 	
 	public static final RegistryObject<Item> BLUEBERRIES = ITEMS.register("blueberry", () -> new Item(new Item.Properties().group(MoreOres.ITEMS)
 			.food(new Food.Builder().hunger(4).saturation(0.5f).build())));
@@ -67,6 +80,12 @@ public class ItemInit {
 			.food(new Food.Builder().hunger(4).saturation(0.5f).build())));
 	public static final RegistryObject<Item> LEMON = ITEMS.register("lemon", () -> new Item(new Item.Properties().group(MoreOres.ITEMS)
 			.food(new Food.Builder().hunger(4).saturation(0.5f).build())));
+	
+	
+	
+	
+	
+	// Apples
 	
 	public static final RegistryObject<Item> ALEXANDRITE_APPLE = ITEMS.register("alexandrite_apple", 
 			() -> new Item(new Item.Properties().group(MoreOres.ITEMS).food(new Food.Builder()
@@ -123,13 +142,126 @@ public class ItemInit {
 					.effect(() -> new EffectInstance(Effects.SPEED, 4800, 2), 1.0f).effect(() -> new EffectInstance(Effects.CONDUIT_POWER, 9600, 2), 1.0f)
 					.hunger(4).setAlwaysEdible().saturation(1.2f).build())));
 	
+	
+	
+	
+	// Totems
+	
 	public static final RegistryObject<DiamondTotem> DIAMOND_TOTEM = ITEMS.register("diamond_totem", 
 			() -> new DiamondTotem(new Item.Properties().group(MoreOres.ITEMS).maxStackSize(1)));
 	public static final RegistryObject<EmeraldTotem> EMERALD_TOTEM = ITEMS.register("emerald_totem", 
 			() -> new EmeraldTotem(new Item.Properties().group(MoreOres.ITEMS).maxStackSize(1)));
 	
 	
+	
+	
+	
+	// Tools
+	
+	public static final RegistryObject<Item> ALEXANDRITE_AXE = ITEMS.register("alexandrite_axe", 
+			() -> new AxeItem(ModItemTier.ALEXANDRITE, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALEXANDRITE_PICKAXE = ITEMS.register("alexandrite_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALEXANDRITE_SHOVEL = ITEMS.register("alexandrite_shovel", 
+			() -> new ShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALEXANDRITE_SWORD = ITEMS.register("alexandrite_sword", 
+			() -> new SwordItem(ModItemTier.ALEXANDRITE, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
 
+	public static final RegistryObject<Item> ALUMINIUM_AXE = ITEMS.register("aluminium_axe", 
+			() -> new AxeItem(ModItemTier.ALUMINIUM, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALUMINIUM_PICKAXE = ITEMS.register("aluminium_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALUMINIUM_SHOVEL = ITEMS.register("aluminium_shovel", 
+			() -> new ShovelItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ALUMINIUM_SWORD = ITEMS.register("aluminium_sword", 
+			() -> new SwordItem(ModItemTier.ALUMINIUM, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> COBALT_AXE = ITEMS.register("cobalt_axe", 
+			() -> new AxeItem(ModItemTier.COBALT, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> COBALT_PICKAXE = ITEMS.register("cobalt_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> COBALT_SHOVEL = ITEMS.register("cobalt_shovel", 
+			() -> new ShovelItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> COBALT_SWORD = ITEMS.register("cobalt_sword", 
+			() -> new SwordItem(ModItemTier.COBALT, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> ELECTRUM_AXE = ITEMS.register("electrum_axe", 
+			() -> new AxeItem(ModItemTier.ELECTRUM, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ELECTRUM_PICKAXE = ITEMS.register("electrum_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.ELECTRUM, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ELECTRUM_SHOVEL = ITEMS.register("electrum_shovel", 
+			() -> new ShovelItem(ModItemTier.ELECTRUM, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ELECTRUM_SWORD = ITEMS.register("electrum_sword", 
+			() -> new SwordItem(ModItemTier.ELECTRUM, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> JASPER_AXE = ITEMS.register("jasper_axe", 
+			() -> new AxeItem(ModItemTier.JASPER, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> JASPER_PICKAXE = ITEMS.register("jasper_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> JASPER_SHOVEL = ITEMS.register("jasper_shovel", 
+			() -> new ShovelItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> JASPER_SWORD = ITEMS.register("jasper_sword", 
+			() -> new SwordItem(ModItemTier.JASPER, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> ROSE_GOLD_AXE = ITEMS.register("rose_gold_axe", 
+			() -> new AxeItem(ModItemTier.ROSE_GOLD, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ROSE_GOLD_PICKAXE = ITEMS.register("rose_gold_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ROSE_GOLD_SHOVEL = ITEMS.register("rose_gold_shovel", 
+			() -> new ShovelItem(ModItemTier.ROSE_GOLD, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> ROSE_GOLD_SWORD = ITEMS.register("rose_gold_sword", 
+			() -> new SwordItem(ModItemTier.ROSE_GOLD, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> SAPPHIRE_AXE = ITEMS.register("sapphire_axe", 
+			() -> new AxeItem(ModItemTier.SAPPHIRE, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel", 
+			() -> new ShovelItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword", 
+			() -> new SwordItem(ModItemTier.SAPPHIRE, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> SHADOW_AXE = ITEMS.register("shadow_axe", 
+			() -> new AxeItem(ModItemTier.SHADOW, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SHADOW_PICKAXE = ITEMS.register("shadow_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.SHADOW, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SHADOW_SHOVEL = ITEMS.register("shadow_shovel", 
+			() -> new ShovelItem(ModItemTier.SHADOW, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SHADOW_SWORD = ITEMS.register("shadow_sword", 
+			() -> new SwordItem(ModItemTier.SHADOW, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> SILVER_AXE = ITEMS.register("silver_axe", 
+			() -> new AxeItem(ModItemTier.SILVER, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SILVER_PICKAXE = ITEMS.register("silver_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SILVER_SHOVEL = ITEMS.register("silver_shovel", 
+			() -> new ShovelItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SILVER_SWORD = ITEMS.register("silver_sword", 
+			() -> new SwordItem(ModItemTier.SILVER, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> SUNSTONE_AXE = ITEMS.register("sunstone_axe", 
+			() -> new AxeItem(ModItemTier.SUNSTONE, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SUNSTONE_PICKAXE = ITEMS.register("sunstone_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SUNSTONE_SHOVEL = ITEMS.register("sunstone_shovel", 
+			() -> new ShovelItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> SUNSTONE_SWORD = ITEMS.register("sunstone_sword", 
+			() -> new SwordItem(ModItemTier.SUNSTONE, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	public static final RegistryObject<Item> TURQUOISE_AXE = ITEMS.register("turquoise_axe", 
+			() -> new AxeItem(ModItemTier.TURQUOISE, 5.0F, -3.1F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> TURQUOISE_PICKAXE = ITEMS.register("turquoise_pickaxe", 
+			() -> new PickaxeItem(ModItemTier.TURQUOISE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> TURQUOISE_SHOVEL = ITEMS.register("turquoise_shovel", 
+			() -> new ShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	public static final RegistryObject<Item> TURQUOISE_SWORD = ITEMS.register("turquoise_sword", 
+			() -> new SwordItem(ModItemTier.TURQUOISE, 6, -1.4F, (new Item.Properties()).group(MoreOres.TOOLS)));
+	
+	
+	
+	
+	
+	
 	// Block Items
 
 	public static final RegistryObject<BlockItem> ALEXANDRITE_BLOCK = ITEMS.register("alexandrite_block",
@@ -185,4 +317,5 @@ public class ItemInit {
 	public static final RegistryObject<BlockItem> TURQUOISE_ORE = ITEMS.register("turquoise_ore",
 			() -> new BlockItem(BlockInit.TURQUOISE_ORE.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 
-}
+	}
+

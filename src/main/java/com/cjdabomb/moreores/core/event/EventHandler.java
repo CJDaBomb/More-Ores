@@ -1,7 +1,5 @@
 package com.cjdabomb.moreores.core.event;
 
-import java.util.UUID;
-
 import com.cjdabomb.moreores.MoreOres;
 import com.cjdabomb.moreores.core.init.ItemInit;
 
@@ -12,7 +10,6 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -30,10 +27,8 @@ public class EventHandler {
         if (!(event.getEntityLiving() instanceof ServerPlayerEntity)) return;
 
         ServerPlayerEntity player = (ServerPlayerEntity)event.getEntityLiving();
-        player.sendMessage(ITextComponent.getTextComponentOrEmpty("player taking damage"), UUID.randomUUID());
 
         if(event.getAmount() >= player.getHealth()) {
-        	player.sendMessage(ITextComponent.getTextComponentOrEmpty("fatal damage"), UUID.randomUUID());
             ItemStack itemstack = null;
 
             for (Hand hand : Hand.values()) {
@@ -46,7 +41,6 @@ public class EventHandler {
             }
 
             if (itemstack != null) {
-            	player.sendMessage(ITextComponent.getTextComponentOrEmpty("has custom totem"), UUID.randomUUID());
                 player.setHealth(1.0F);
                 player.clearActivePotions();
                 if(itemstack.getItem() == ItemInit.EMERALD_TOTEM.get()){
