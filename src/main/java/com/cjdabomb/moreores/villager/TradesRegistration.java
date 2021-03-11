@@ -1,6 +1,7 @@
 package com.cjdabomb.moreores.villager;
 
 import com.cjdabomb.moreores.MoreOres;
+import com.cjdabomb.moreores.core.init.ItemInit;
 
 import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -16,13 +17,16 @@ public class TradesRegistration {
 
         if (event.getType() == VillagerProfessions.JEWELER)
         {
-        	event.getTrades().get(1).add((new RandomTradeBuilder(16, 2, 0.05F).setRoseQuartzPrice(15,22).setForSale(Items.COAL_ORE, 1, 2).build()));
-        	event.getTrades().get(1).add((new RandomTradeBuilder(16, 3, 0.05F).setPrice(Items.GOLD_INGOT, 4,8).setPrice2(Items.APPLE, 2,2).setForSale(Items.GOLDEN_APPLE, 1, 2).build()));
-        	event.getTrades().get(1).add((new RandomTradeBuilder(16, 2, 0.05F).setPrice(Items.WITHER_SKELETON_SKULL, 1,1).setPrice2(Items.STONE, 8,8).setForSale(Items.NETHER_STAR, 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.05F).setRoseQuartzPrice(9,15).setForSale(ItemInit.ALUMINIUM_INGOT.get(), 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.08F).setRoseQuartzPrice(10,17).setForSale(ItemInit.SILVER_INGOT.get(), 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.08F).setRoseQuartzPrice(12,20).setForSale(ItemInit.ELECTRUM_INGOT.get(), 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.07F).setRoseQuartzPrice(12,20).setForSale(ItemInit.JASPER.get(), 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.07F).setRoseQuartzPrice(14,21).setForSale(ItemInit.SAPPHIRE.get(), 1, 2).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.2F).setRoseQuartzPrice(15,22).setForSale(Items.DIAMOND, 1, 1).build()));
+        	event.getTrades().get(1).add((new RandomTradeBuilder(12, 2, 0.1F).setRoseQuartzPrice(10,22).setForSale(Items.GOLD_INGOT, 1, 2).build()));
         	
-        	event.getTrades().get(2).add((new RandomTradeBuilder(16, 3, 0.2F).setPrice(Items.IRON_INGOT, 1,1).setPrice2(Items.STONE, 8,8).setForSale(Items.IRON_ORE, 1, 2).build()));
-        	event.getTrades().get(2).add((new RandomTradeBuilder(16, 4, 0.2F).setPrice(Items.GOLD_INGOT, 1,1).setPrice2(Items.STONE, 8,8).setForSale(Items.GOLD_ORE, 1, 2).build()));
-        	event.getTrades().get(2).add((new RandomTradeBuilder(16, 4, 0.2F).setPrice(Items.GOLD_INGOT, 1,1).setPrice2(Items.NETHERRACK, 8,8).setForSale(Items.NETHER_GOLD_ORE, 1, 2).build()));
+        	event.getTrades().get(2).add((new RandomTradeBuilder(16, 2, 0.05F).setPrice(Items.EMERALD, 20,35).setForSale(ItemInit.ROSE_QUARTZ.get(), 1, 2).build()));
+        	event.getTrades().get(2).add((new RandomTradeBuilder(12, 3, 0.05F).setRoseQuartzPrice(4,8).setPrice2(Items.APPLE, 2,2).setForSale(Items.GOLDEN_APPLE, 1, 2).build()));
         	
         	event.getTrades().get(3).add((new RandomTradeBuilder(16, 5, 0.05F).setPrice(Items.REDSTONE, 1,1).setPrice2(Items.STONE, 8,8).setForSale(Items.REDSTONE_ORE, 1, 2).build()));
         	event.getTrades().get(3).add((new RandomTradeBuilder(16, 5, 0.05F).setPrice(Items.LAPIS_LAZULI, 1,1).setPrice2(Items.STONE, 8,8).setForSale(Items.LAPIS_ORE, 1, 2).build()));

@@ -1,9 +1,12 @@
 package com.cjdabomb.moreores.common.te;
 
 import com.cjdabomb.moreores.MoreOres;
+import com.cjdabomb.moreores.common.blocks.JewelerBarrelBlock;
 import com.cjdabomb.moreores.common.containers.JewelerBarrelContainer;
+import com.cjdabomb.moreores.core.init.ItemInit;
 import com.cjdabomb.moreores.core.init.TileEntityTypeInit;
 
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,16 +14,20 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class JewelerBarrelTileEntity extends LockableLootTileEntity implements ITickableTileEntity{
+public class JewelerBarrelTileEntity extends LockableLootTileEntity {
 
-	public static int slots = 63;
+	public static int slots = 97;
+	public static boolean canConfirm;
 
 	protected NonNullList<ItemStack> items = NonNullList.withSize(slots, ItemStack.EMPTY);
 
@@ -33,7 +40,6 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity implements I
 		this(TileEntityTypeInit.JEWELER_BARREL_TILE_ENTITY.get());
 	}
 
-
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
@@ -42,14 +48,21 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity implements I
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		// TODO Auto-generated method stub
+		if (getStackInSlot(97).getStack() == ItemInit.JASPER.get().getDefaultInstance()) {
+			canConfirm = true;
+		} else {
+			canConfirm = false;
+		}
 		return null;
+	}
+
+	public ItemStack getItem() {
+		return this.items.get(slots);
 	}
 
 	@Override
@@ -73,12 +86,12 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity implements I
 	@Override
 	public boolean isUsableByPlayer(PlayerEntity player) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		this.items.clear();
 
 	}
 
@@ -123,9 +136,35 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity implements I
 
 	}
 
+
 	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
+	public void openInventory(PlayerEntity player) {
+		BlockState blockstate = this.getBlockState();
+		boolean flag = blockstate.get(JewelerBarrelBlock.PROPERTY_OPEN);
+		if (!flag) {
+			this.playSound(blockstate, SoundEvents.BLOCK_BARREL_OPEN);
+			this.setOpenProperty(blockstate, true);
+		}
+	}
+	
+	@Override
+	public void closeInventory(PlayerEntity player) {
+		BlockState blockstate = this.getBlockState();
+		this.playSound(blockstate, SoundEvents.BLOCK_BARREL_CLOSE);
+		this.setOpenProperty(blockstate, false);
 		
+	}
+
+	private void setOpenProperty(BlockState state, boolean open) {
+		this.world.setBlockState(this.getPos(), state.with(BarrelBlock.PROPERTY_OPEN, Boolean.valueOf(open)), 3);
+	}
+
+	private void playSound(BlockState state, SoundEvent sound) {
+		Vector3i vector3i = state.get(BarrelBlock.PROPERTY_FACING).getDirectionVec();
+		double d0 = (double) this.pos.getX() + 0.5D + (double) vector3i.getX() / 2.0D;
+		double d1 = (double) this.pos.getY() + 0.5D + (double) vector3i.getY() / 2.0D;
+		double d2 = (double) this.pos.getZ() + 0.5D + (double) vector3i.getZ() / 2.0D;
+		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F,
+				this.world.rand.nextFloat() * 0.1F + 0.9F);
 	}
 }

@@ -1,6 +1,7 @@
 package com.cjdabomb.moreores.core.init;
 
 import com.cjdabomb.moreores.MoreOres;
+import com.cjdabomb.moreores.common.blocks.AlloySynthesizerBlock;
 import com.cjdabomb.moreores.common.blocks.DarkMatterBlock;
 import com.cjdabomb.moreores.common.blocks.JewelerBarrelBlock;
 
@@ -55,6 +56,9 @@ public class BlockInit {
 			() -> new Block(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F)
 					.harvestLevel(2).sound(SoundType.METAL)));
 	
+	public static final RegistryObject<AlloySynthesizerBlock> ALLOY_SYNTHESIZER = BLOCKS.register("alloy_synthesizer", 
+			() -> new AlloySynthesizerBlock(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(4, 4).harvestTool(ToolType.PICKAXE).harvestLevel(1)
+					.sound(SoundType.METAL).setRequiresTool()));
 	public static final RegistryObject<JewelerBarrelBlock> JEWELER_BARREL = BLOCKS.register("jeweler_barrel", 
 		 () -> new JewelerBarrelBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(4, 4)
 				 .harvestTool(ToolType.AXE).harvestLevel(0).sound(SoundType.WOOD).setRequiresTool()));

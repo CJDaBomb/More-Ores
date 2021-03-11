@@ -1,0 +1,9 @@
+{
+	"open_jeweler_barrel": {
+		"category": "block",
+		"subtitle": "moreores.subtitle.openJewelerBarrel",
+		"sounds": [
+			"moreores:jewel"
+		]
+	}
+}

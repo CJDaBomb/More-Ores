@@ -289,6 +289,8 @@ public class ItemInit {
 	public static final RegistryObject<BlockItem> TURQUOISE_BLOCK = ITEMS.register("turquoise_block",
 			() -> new BlockItem(BlockInit.TURQUOISE_BLOCK.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 	
+	public static final RegistryObject<BlockItem> ALLOY_SYNTHESIZER = ITEMS.register("alloy_synthesizer", 
+			() -> new BlockItem(BlockInit.ALLOY_SYNTHESIZER.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 	public static final RegistryObject<BlockItem> JEWELER_BARREL = ITEMS.register("jeweler_barrel", 
 			() -> new BlockItem(BlockInit.JEWELER_BARREL.get(), new Item.Properties().group(MoreOres.BLOCKS)));
 	public static final RegistryObject<BlockItem> DIAMOND_LANTERN = ITEMS.register("diamond_lantern",

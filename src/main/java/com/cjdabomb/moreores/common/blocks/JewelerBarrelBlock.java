@@ -31,8 +31,7 @@ public class JewelerBarrelBlock extends DirectionalBlock {
 
 	public JewelerBarrelBlock(AbstractBlock.Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(PROPERTY_OPEN,
-				Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(PROPERTY_OPEN, Boolean.valueOf(false)));
 	}
 
 	@Override
@@ -43,32 +42,32 @@ public class JewelerBarrelBlock extends DirectionalBlock {
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
 		builder.add(FACING, PROPERTY_OPEN);
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		
+
 		return TileEntityTypeInit.JEWELER_BARREL_TILE_ENTITY.get().create();
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		if(worldIn.isRemote()) {
+		if (worldIn.isRemote()) {
+			return ActionResultType.SUCCESS;
+		} else {
 			TileEntity te = worldIn.getTileEntity(pos);
-			if(te instanceof JewelerBarrelTileEntity) {
+			if (te instanceof JewelerBarrelTileEntity) {
 				NetworkHooks.openGui((ServerPlayerEntity) player, (JewelerBarrelTileEntity) te, pos);
 			}
 		}
-		return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+		return ActionResultType.CONSUME;
 	}
 
 }

@@ -28,6 +28,8 @@ public class ModClientEvents {
 	public static void clientSetup(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(ContainerTypeInit.JEWELER_BARREL_CONTAINER.get(), JewelerBarrelScreen::new);
 		
+		
+		
 		Map<String, PlayerRenderer> skinMap = event.getMinecraftSupplier().get().getRenderManager().getSkinMap();
 		addVoidElytraLayer(skinMap.get("default"));
 		addVoidElytraLayer(skinMap.get("slim"));
