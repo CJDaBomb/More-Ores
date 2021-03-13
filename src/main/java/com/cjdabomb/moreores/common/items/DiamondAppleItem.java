@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class DiamondAppleItem extends Item {
 
@@ -16,12 +19,12 @@ public class DiamondAppleItem extends Item {
 		
 	}
 	
-	public boolean hasEffect(ItemStack stack) {
+	public boolean isFoil(@NotNull ItemStack stack) {
 		return true;
 	}
-	
+	@Nonnull
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+	public ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving) {
 		ItemStack stack1 = new ItemStack(Items.DIAMOND);
 		ItemHandlerHelper.giveItemToPlayer((PlayerEntity) entityLiving, stack1);
 		return stack;

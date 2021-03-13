@@ -22,7 +22,7 @@ public class RandomTradeBuilder
     {
         for(int i = 0; i <= 6; ++i)
         {
-            RandomTradeBuilder.TRADES_LIST.add(new ArrayList<RandomTradeBuilder>());
+            RandomTradeBuilder.TRADES_LIST.add(new ArrayList<>());
         }
     }
     

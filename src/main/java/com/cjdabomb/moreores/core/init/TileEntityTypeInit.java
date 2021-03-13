@@ -15,8 +15,8 @@ public class TileEntityTypeInit {
 	
 	
 	public static final RegistryObject<TileEntityType<JewelerBarrelTileEntity>> JEWELER_BARREL_TILE_ENTITY = TILE_ENTITIES.register("jeweler_barrel", 
-			() ->  TileEntityType.Builder.create(JewelerBarrelTileEntity::new, BlockInit.JEWELER_BARREL.get()).build(null));
+			() ->  TileEntityType.Builder.of(JewelerBarrelTileEntity::new, BlockInit.JEWELER_BARREL.get()).build(null));
 	
 	public static final RegistryObject<TileEntityType<AlloySynthesizerTileEntity>> ALLOY_SYNTHESIZER_TILE_ENTITY = TILE_ENTITIES.register("alloy_synthesizer", 
-			() ->  TileEntityType.Builder.create(AlloySynthesizerTileEntity::new, BlockInit.ALLOY_SYNTHESIZER.get()).build(null));
+			() ->  TileEntityType.Builder.of(AlloySynthesizerTileEntity::new, BlockInit.ALLOY_SYNTHESIZER.get()).build(null));
 }

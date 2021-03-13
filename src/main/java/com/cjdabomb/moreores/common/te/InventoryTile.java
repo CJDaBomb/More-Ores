@@ -21,6 +21,7 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class InventoryTile extends TileEntity implements ITickableTileEntity, ISidedInventory, ISidedInventoryProvider {
 
@@ -41,7 +42,7 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
     @Override
     public void tick() {
         this.timer++;
-        if (this.world != null) {
+        if (this.level != null) {
             if (this.requiresUpdate) {
                 updateTile();
                 this.requiresUpdate = false;
@@ -53,7 +54,7 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
     @Nonnull
     @Override
     public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(@Nonnull net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
-        if (!this.removed && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == Direction.UP)
                 return handlers[0].cast();
             else if (facing == Direction.DOWN)
@@ -78,7 +79,7 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
             @Override
             protected void onContentsChanged(int slot) {
                 updateTile();
-                markDirty();
+                setChanged();
             }
         };
     }
@@ -104,9 +105,10 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
         return this.size;
     }
 
+
     @Override
-    public void read(BlockState state, @Nonnull CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(@NotNull BlockState state, @Nonnull CompoundNBT compound) {
+        super.load(state, compound);
         ListNBT list = compound.getList("Items", 10);
         for (int x = 0; x < list.size(); ++x) {
             CompoundNBT nbt = list.getCompound(x);
@@ -114,7 +116,7 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
             this.handler.ifPresent(inventory -> {
                 int invslots = inventory.getSlots();
                 if (r < invslots) {
-                    inventory.setStackInSlot(r, ItemStack.read(nbt));
+                    inventory.setStackInSlot(r, ItemStack.of(nbt));
                 }
             });
         }
@@ -123,8 +125,8 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
 
     @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(@Nonnull CompoundNBT compound) {
+        super.save(compound);
         ListNBT list = new ListNBT();
         this.handler.ifPresent(inventory -> {
             int slots = inventory.getSlots();
@@ -133,7 +135,7 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
                 if (!stack.isEmpty()) {
                     CompoundNBT nbt = new CompoundNBT();
                     nbt.putByte("Slot", (byte) x);
-                    stack.write(nbt);
+                    stack.save(nbt);
                     list.add(nbt);
                 }
             }
@@ -146,9 +148,9 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
 
     public void updateTile() {
         this.requestModelDataUpdate();
-        this.markDirty();
-        if (this.getWorld() != null) {
-            this.getWorld().notifyBlockUpdate(pos, this.getBlockState(), this.getBlockState(), 3);
+        this.setChanged();
+        if (this.getLevel() != null) {
+            this.getLevel().sendBlockUpdated(worldPosition, this.getBlockState(), this.getBlockState(), 3);
         }
     }
 
@@ -156,12 +158,12 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.getPos(), -1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.getBlockPos(), -1, this.getUpdateTag());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.handleUpdateTag(getBlockState(), pkt.getNbtCompound());
+        this.handleUpdateTag(getBlockState(), pkt.getTag());
     }
 
     @Override
@@ -181,18 +183,18 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
     abstract public int[] getSlotsForFace(@Nonnull Direction side);
 
     @Override
-    abstract public boolean canInsertItem(int index, @Nonnull ItemStack itemStackIn, @Nullable Direction direction);
+    abstract public boolean canPlaceItemThroughFace(int index, @Nonnull ItemStack itemStackIn, @Nullable Direction direction);
 
     @Override
-    abstract public boolean canExtractItem(int index, @Nonnull ItemStack stack, @Nonnull Direction direction);
+    abstract public boolean canTakeItemThroughFace(int index, @Nonnull ItemStack stack, @Nonnull Direction direction);
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return size;
     }
 
     @Override
-    abstract public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack);
+    abstract public boolean canPlaceItem(int index, @Nonnull ItemStack stack);
 
 
     @Override
@@ -202,34 +204,34 @@ public abstract class InventoryTile extends TileEntity implements ITickableTileE
 
     @Nonnull
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return this.getInventory().getStackInSlot(index);
     }
 
     @Nonnull
     @Override
-    public ItemStack decrStackSize(int index, int count) {
+    public ItemStack removeItem(int index, int count) {
         return this.getInventory().extractItem(index, count, false);
     }
 
     @Nonnull
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         return this.extractItem(index);
     }
 
     @Override
-    public void setInventorySlotContents(int index, @Nonnull ItemStack stack) {
+    public void setItem(int index, @Nonnull ItemStack stack) {
         this.getInventory().setStackInSlot(index, stack);
     }
 
     @Override
-    public boolean isUsableByPlayer(@Nonnull PlayerEntity player) {
+    public boolean stillValid(@Nonnull PlayerEntity player) {
         return false;
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
 
     }
 

@@ -11,9 +11,9 @@ public class PotionRecipeRegistry  {
 
 	public static boolean addRecipe(Ingredient input, Ingredient ingredient, ItemStack output) {
 		
-		return BrewingRecipeRegistry.addRecipe(Ingredient.fromStacks(PotionUtils
-				.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER)),Ingredient.fromStacks(new ItemStack(Items.DIAMOND)),
-				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION),Potions.LONG_REGENERATION));
+		return BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils
+				.setPotion(new ItemStack(Items.POTION), Potions.WATER)),Ingredient.of(new ItemStack(Items.DIAMOND)),
+				PotionUtils.setPotion(new ItemStack(Items.POTION),Potions.LONG_REGENERATION));
 
 	}
 		

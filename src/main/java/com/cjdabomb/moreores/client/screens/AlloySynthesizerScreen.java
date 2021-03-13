@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class AlloySynthesizerScreen extends ContainerScreen<AlloySynthesizerContainer> {
@@ -29,10 +30,10 @@ public class AlloySynthesizerScreen extends ContainerScreen<AlloySynthesizerCont
 
     public AlloySynthesizerScreen(AlloySynthesizerContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.guiTop = 0;
-        this.xSize = 175;
-        this.ySize = 183;
+        this.leftPos = 0;
+        this.topPos = 0;
+        this.imageWidth = 175;
+        this.imageHeight = 183;
 
     }
 
@@ -45,23 +46,23 @@ public class AlloySynthesizerScreen extends ContainerScreen<AlloySynthesizerCont
     }
     
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
     	super.renderBackground(matrixStack, 0);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-    	super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
-        this.font.drawString(matrixStack, this.title.getUnformattedComponentText(), 8.0f, 6.0f, 4210752);
+    protected void renderLabels(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
+    	super.renderLabels(matrixStack, mouseX, mouseY);
+        this.font.draw(matrixStack, this.title.getContents(), 8.0f, 6.0f, 4210752);
     }
 
     @SuppressWarnings({ "deprecation", "resource" })
 	protected void renderRecipes() {
-        AlloySynthesizerTileEntity tile = (AlloySynthesizerTileEntity) this.container.tile;
-        if (Objects.requireNonNull(tile.getWorld()).isRemote) {
+        AlloySynthesizerTileEntity tile = (AlloySynthesizerTileEntity) this.menu.tile;
+        if (Objects.requireNonNull(tile.getLevel()).isClientSide) {
             //*Gets the Recipes
-            Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, tile.getWorld());
+            Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, tile.getLevel());
             int yOffset = 0;
             int renders = 0;
             RenderSystem.pushMatrix();
@@ -71,24 +72,24 @@ public class AlloySynthesizerScreen extends ContainerScreen<AlloySynthesizerCont
                     AlloySmeltingRecipe rr = (AlloySmeltingRecipe) r;
                     ItemStack s1 = rr.getInput1Stack();
                     ItemStack s2 = rr.getInput2Stack();
-                    ItemStack s3 = rr.getRecipeOutput();
+                    ItemStack s3 = rr.getResultItem();
                     //!Renders Item inside GUI
-                    this.itemRenderer.zLevel = 0f;
+                    this.itemRenderer.blitOffset = 0f;
                     
                     renders++;
-                    this.itemRenderer.zLevel = 100.0F;
+                    this.itemRenderer.blitOffset = 100.0F;
                     //*Render the ItemStack1 into the GUI
-                    this.itemRenderer.renderItemAndEffectIntoGUI(s1, this.guiLeft - 110 + 6, this.guiTop + yOffset + 6);
-                    this.itemRenderer.renderItemOverlays(this.font, s1, this.guiLeft - 110 + 6, this.guiTop + yOffset + 6);
+                    this.itemRenderer.renderAndDecorateItem(s1, this.leftPos - 110 + 6, this.topPos + yOffset + 6);
+                    this.itemRenderer.renderGuiItemDecorations(this.font, s1, this.leftPos - 110 + 6, this.topPos + yOffset + 6);
                     //*Render the ItemStack2 into the GUI
-                    this.itemRenderer.renderItemAndEffectIntoGUI(s2, this.guiLeft - 110 + 26, this.guiTop + yOffset + 6);
-                    this.itemRenderer.renderItemOverlays(this.font, s2, this.guiLeft - 110 + 26, this.guiTop + yOffset + 6);
+                    this.itemRenderer.renderAndDecorateItem(s2, this.leftPos - 110 + 26, this.topPos + yOffset + 6);
+                    this.itemRenderer.renderGuiItemDecorations(this.font, s2, this.leftPos - 110 + 26, this.topPos + yOffset + 6);
                     //*Render the ItemStack3 into the GUI
-                    this.itemRenderer.renderItemAndEffectIntoGUI(s3, this.guiLeft - 110 + 77, this.guiTop + yOffset + 6);
-                    this.itemRenderer.renderItemOverlays(this.font, s3, this.guiLeft - 110 + 77, this.guiTop + yOffset + 6);
+                    this.itemRenderer.renderAndDecorateItem(s3, this.leftPos - 110 + 77, this.topPos + yOffset + 6);
+                    this.itemRenderer.renderGuiItemDecorations(this.font, s3, this.leftPos - 110 + 77, this.topPos + yOffset + 6);
                     //*Increase the Y_Offset
                     yOffset += 29;
-                    this.itemRenderer.zLevel = 0f;
+                    this.itemRenderer.blitOffset = 0f;
                 }
             }
             RenderSystem.popMatrix();
@@ -98,22 +99,22 @@ public class AlloySynthesizerScreen extends ContainerScreen<AlloySynthesizerCont
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+	protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int x, int y) {
 		 RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 	        //*Checking for Null
 	        if (this.minecraft == null) {
 	            return;
 	        }
 	        //*Bind the Texture that is rendered in the Background
-	        this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+	        this.minecraft.getTextureManager().bind(BACKGROUND_TEXTURE);
 	        //*Halves the Screen Width(So it is centered Vertically)
-	        int X = (this.width - this.xSize) / 2;
+	        int X = (this.width - this.imageWidth) / 2;
 	        //*Halves the Screen Height(So it is centered Horizontally)
-	        int Y = (this.height - this.ySize) / 2;
-	        int j = this.guiTop;
-	        int l = this.guiLeft;
-	        this.blit(matrixStack, l, j, 0, 0, this.xSize, this.ySize);
-	        AlloySynthesizerTileEntity tile = (AlloySynthesizerTileEntity) this.container.tile;
+	        int Y = (this.height - this.imageHeight) / 2;
+	        int j = this.topPos;
+	        int l = this.leftPos;
+	        this.blit(matrixStack, l, j, 0, 0, this.imageWidth, this.imageHeight);
+	        AlloySynthesizerTileEntity tile = (AlloySynthesizerTileEntity) this.menu.tile;
 
 	        if (tile.isSmelting) {
 	            if (tick == 20) {

@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
+import java.util.Objects;
+
 
 @EventBusSubscriber(modid = MoreOres.MOD_ID, bus = Bus.MOD)
 @ObjectHolder(MoreOres.MOD_ID)
@@ -24,7 +26,7 @@ public class VillagerProfessions
     {
         IForgeRegistry<VillagerProfession> registry = event.getRegistry();
         
-        registry.register(VillagerUtil.villagerProfession("jeweler", PointOfInterestTypes.JEWELER, ImmutableSet.of(), ImmutableSet.of(), null).setRegistryName(MoreOres.MOD_ID, "jeweler"));
+        registry.register(Objects.requireNonNull(VillagerUtil.villagerProfession("jeweler", PointOfInterestTypes.JEWELER, ImmutableSet.of(), ImmutableSet.of(), null)).setRegistryName(MoreOres.MOD_ID, "jeweler"));
         
     }
 }

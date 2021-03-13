@@ -16,6 +16,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer> {
@@ -38,36 +39,34 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 	public PlayerEntity player;
 
 	private Button myButton;
-	final int relX = (this.width - this.xSize) / 2;
-	final int relY = (this.height - this.ySize) / 2;
+	final int relX = (this.width - this.imageWidth) / 2;
+	final int relY = (this.height - this.imageHeight) / 2;
 
 	public JewelerBarrelScreen(JewelerBarrelContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
 
 		this.myButton = new Button(relX + 10, relY + 10, 160, 20, // pos and size
-				new StringTextComponent(""), (button) -> {
-					buttonPressed();
-				}, (button, matrixStack, x, y) -> {
+				new StringTextComponent(""), (button) -> buttonPressed(), (button, matrixStack, x, y) -> {
 				});
 
-		this.guiLeft = 0;
-		this.guiTop = 0;
+		this.leftPos = 0;
+		this.topPos = 0;
 
 		if (JewelerBarrelContainer.upgrade == 0) {
-			this.xSize = 180;
-			this.ySize = 150;
+			this.imageWidth = 180;
+			this.imageHeight = 150;
 		} else if (JewelerBarrelContainer.upgrade == 1) {
-			this.xSize = 180;
-			this.ySize = 166;
+			this.imageWidth = 180;
+			this.imageHeight = 166;
 		} else if (JewelerBarrelContainer.upgrade == 2) {
-			this.xSize = 180;
-			this.ySize = 182;
+			this.imageWidth = 180;
+			this.imageHeight = 182;
 		} else if (JewelerBarrelContainer.upgrade == 3) {
-			this.xSize = 180;
-			this.ySize = 198;
+			this.imageWidth = 180;
+			this.imageHeight = 198;
 		} else if (JewelerBarrelContainer.upgrade == 4) {
-			this.xSize = 180;
-			this.ySize = 214;
+			this.imageWidth = 180;
+			this.imageHeight = 214;
 		}
 	}
 
@@ -80,77 +79,82 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 
 
 	private void buttonPressed() {
-		if (JewelerBarrelTileEntity.canConfirm == true) {
+		if (JewelerBarrelTileEntity.canConfirm) {
 			if (JewelerBarrelContainer.upgrade < 5)
 				JewelerBarrelContainer.upgrade++;
-			this.container.getSlot(97).decrStackSize(1);
-			this.container.syncContainer();
+			this.menu.getSlot(97).remove(1);
+			this.menu.syncContainer();
 
 		}
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+		this.renderTooltip(matrixStack, mouseX, mouseY);
 		this.myButton.render(matrixStack, mouseX, mouseY, partialTicks);
 
 		RenderSystem.color4f(1F, 1F, 1F, 1F);
-		if (JewelerBarrelTileEntity.canConfirm == true) {
-			Minecraft.getInstance().getTextureManager().bindTexture(CAN_CONFIRM_BUTTON);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+		if (JewelerBarrelTileEntity.canConfirm) {
+			Minecraft.getInstance().getTextureManager().bind(CAN_CONFIRM_BUTTON);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		} else {
-			Minecraft.getInstance().getTextureManager().bindTexture(CONFIRM_BUTTON);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			Minecraft.getInstance().getTextureManager().bind(CONFIRM_BUTTON);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		}
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
-		this.font.func_243248_b(matrixStack, this.playerInventory.getDisplayName(), (float) this.playerInventoryTitleX,
-				(float) this.playerInventoryTitleY, 4210752);
+	protected void renderLabels(@NotNull MatrixStack matrixStack, int x, int y) {
+		this.font.draw(matrixStack, this.inventory.getDisplayName(), (float) this.inventoryLabelX,
+				(float) this.inventoryLabelY, 4210752);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX,
-			int mouseY) {
+	protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX,
+							int mouseY) {
 		if (JewelerBarrelContainer.upgrade == 0) {
 			RenderSystem.color4f(1F, 1F, 1F, 1F);
-			this.minecraft.textureManager.bindTexture(JEWELER_BARREL_GUI);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			assert this.minecraft != null;
+			this.minecraft.textureManager.bind(JEWELER_BARREL_GUI);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		} else if (JewelerBarrelContainer.upgrade == 1) {
 			RenderSystem.color4f(1F, 1F, 1F, 1F);
-			this.minecraft.textureManager.bindTexture(JEWELER_BARREL_UPGRADE);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			assert this.minecraft != null;
+			this.minecraft.textureManager.bind(JEWELER_BARREL_UPGRADE);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		} else if (JewelerBarrelContainer.upgrade == 2) {
 			RenderSystem.color4f(1F, 1F, 1F, 1F);
-			this.minecraft.textureManager.bindTexture(JEWELER_BARREL_UPGRADE_2);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			assert this.minecraft != null;
+			this.minecraft.textureManager.bind(JEWELER_BARREL_UPGRADE_2);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		} else if (JewelerBarrelContainer.upgrade == 3) {
 			RenderSystem.color4f(1F, 1F, 1F, 1F);
-			this.minecraft.textureManager.bindTexture(JEWELER_BARREL_UPGRADE_3);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			assert this.minecraft != null;
+			this.minecraft.textureManager.bind(JEWELER_BARREL_UPGRADE_3);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		} else if (JewelerBarrelContainer.upgrade == 4) {
 			RenderSystem.color4f(1F, 1F, 1F, 1F);
-			this.minecraft.textureManager.bindTexture(JEWELER_BARREL_UPGRADE_4);
-			int x = (this.width - this.xSize) / 2;
-			int y = (this.height - this.ySize) / 2;
-			this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
+			assert this.minecraft != null;
+			this.minecraft.textureManager.bind(JEWELER_BARREL_UPGRADE_4);
+			int x = (this.width - this.imageWidth) / 2;
+			int y = (this.height - this.imageHeight) / 2;
+			this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 		}
 	}
 
@@ -160,7 +164,7 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 	}
 	
 	public void open(PlayerEntity player) {
-		Minecraft.getInstance().displayGuiScreen(new JewelerBarrelScreen(player, container, playerInventory));
+		Minecraft.getInstance().setScreen(new JewelerBarrelScreen(player, menu, inventory));
 	}
 
 }

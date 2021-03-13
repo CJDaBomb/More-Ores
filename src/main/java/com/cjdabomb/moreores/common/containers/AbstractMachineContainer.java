@@ -1,7 +1,6 @@
 package com.cjdabomb.moreores.common.containers;
 
 
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -24,8 +23,8 @@ public abstract class AbstractMachineContainer extends Container {
             this.addSlot(new SlotItemHandler(playerInventory, k, 8 + k * 18, 142));
         }
     }
-
-	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    @Override
+	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}

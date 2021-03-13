@@ -22,12 +22,12 @@ public class VillagerUtil
     
     static
     {
-        VillagerUtil.blockStatesInjector = ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "func_221052_a", PointOfInterestType.class);
+        VillagerUtil.blockStatesInjector = ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "registerBlockStates", PointOfInterestType.class);
     }
     
     public static Set<BlockState> getAllStates(Block block)
     {
-        return ImmutableSet.copyOf(block.getStateContainer().getValidStates());
+        return ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates());
     }
     
     public static void fixPOITypeBlockStates(PointOfInterestType poiType)
@@ -51,31 +51,11 @@ public class VillagerUtil
             c.setAccessible(true);
             return c.newInstance(p1, p2, p3, p4);
         }
-        catch (NoSuchMethodException e)
+        catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException | IllegalArgumentException | InstantiationException e)
         {
             e.printStackTrace();
         }
-        catch (SecurityException e)
-        {
-            e.printStackTrace();
-        }
-        catch (InstantiationException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalArgumentException e)
-        {
-            e.printStackTrace();
-        }
-        catch (InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-        
+
         return null;
     }
     
@@ -87,31 +67,11 @@ public class VillagerUtil
             c.setAccessible(true);
             return c.newInstance(p1, p2, p3, p4, p5);
         }
-        catch (NoSuchMethodException e)
+        catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
             e.printStackTrace();
         }
-        catch (SecurityException e)
-        {
-            e.printStackTrace();
-        }
-        catch (InstantiationException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalArgumentException e)
-        {
-            e.printStackTrace();
-        }
-        catch (InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-        
+
         return null;
     }
     

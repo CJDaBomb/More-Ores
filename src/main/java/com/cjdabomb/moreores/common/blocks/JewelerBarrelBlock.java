@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 public class JewelerBarrelBlock extends DirectionalBlock {
 
@@ -31,17 +32,17 @@ public class JewelerBarrelBlock extends DirectionalBlock {
 
 	public JewelerBarrelBlock(AbstractBlock.Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(PROPERTY_OPEN, Boolean.valueOf(false)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PROPERTY_OPEN, Boolean.FALSE));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite())
-				.with(PROPERTY_OPEN, Boolean.valueOf(false));
+		return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite())
+				.setValue(PROPERTY_OPEN, Boolean.FALSE);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, PROPERTY_OPEN);
 	}
 
@@ -55,14 +56,14 @@ public class JewelerBarrelBlock extends DirectionalBlock {
 
 		return TileEntityTypeInit.JEWELER_BARREL_TILE_ENTITY.get().create();
 	}
-
+	@SuppressWarnings("deprecation")
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote()) {
+	public @NotNull ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player,
+										 @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+		if (worldIn.isClientSide()) {
 			return ActionResultType.SUCCESS;
 		} else {
-			TileEntity te = worldIn.getTileEntity(pos);
+			TileEntity te = worldIn.getBlockEntity(pos);
 			if (te instanceof JewelerBarrelTileEntity) {
 				NetworkHooks.openGui((ServerPlayerEntity) player, (JewelerBarrelTileEntity) te, pos);
 			}

@@ -27,24 +27,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class DarkMatterBlock extends TNTBlock {
 	public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
 
 	   public DarkMatterBlock(AbstractBlock.Properties properties) {
 	      super(properties);
-	      this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
+	      this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.FALSE));
 	   }
 	   
 	   @Override
-	   public void catchFire(BlockState state, World world, BlockPos pos, @Nullable net.minecraft.util.Direction face, @Nullable LivingEntity igniter) {
+	   public void catchFire(@NotNull BlockState state, @NotNull World world, @NotNull BlockPos pos, @Nullable net.minecraft.util.Direction face, @Nullable LivingEntity igniter) {
 	      explode(world, pos, igniter);
 	   }
 	   
 	   @Override
-	   public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-	      if (!oldState.isIn(state.getBlock())) {
-	         if (worldIn.isBlockPowered(pos)) {
+	   public void onPlace(BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, BlockState oldState, boolean isMoving) {
+	      if (!oldState.is(state.getBlock())) {
+	         if (worldIn.hasNeighborSignal(pos)) {
 	            catchFire(state, worldIn, pos, null, null);
 	            worldIn.removeBlock(pos, false);
 	         }
@@ -53,8 +54,8 @@ public class DarkMatterBlock extends TNTBlock {
 	   }
 	   
 	   @Override
-	   public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-	      if (worldIn.isBlockPowered(pos)) {
+	   public void neighborChanged(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos, boolean isMoving) {
+	      if (worldIn.hasNeighborSignal(pos)) {
 	         catchFire(state, worldIn, pos, null, null);
 	         worldIn.removeBlock(pos, false);
 	      }
@@ -62,66 +63,64 @@ public class DarkMatterBlock extends TNTBlock {
 	   }
 
 	  @Override
-	   public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-	      if (!worldIn.isRemote() && !player.isCreative() && state.get(UNSTABLE)) {
+	   public void playerWillDestroy(World worldIn, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull PlayerEntity player) {
+	      if (!worldIn.isClientSide() && !player.isCreative() && state.getValue(UNSTABLE)) {
 	         catchFire(state, worldIn, pos, null, null);
 	      }
 
-	      super.onBlockHarvested(worldIn, pos, state, player);
+	      super.playerWillDestroy(worldIn, pos, state, player);
 	   }
 
 	   @Override
-	   public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-	      if (!worldIn.isRemote) {
-	         DarkMatterEntity tntentity = new DarkMatterEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, explosionIn.getExplosivePlacedBy());
-	         tntentity.setFuse((short)(worldIn.rand.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
-	         worldIn.addEntity(tntentity);
+	   public void wasExploded(World worldIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
+	      if (!worldIn.isClientSide) {
+	         DarkMatterEntity tntentity = new DarkMatterEntity(worldIn, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, explosionIn.getSourceMob());
+	         tntentity.setFuse((short)(worldIn.random.nextInt(tntentity.getLife() / 4) + tntentity.getLife() / 8));
+	         worldIn.addFreshEntity(tntentity);
 	      }
 	   }
 	   
 	   @Deprecated
-	   public static void explode(World world, BlockPos worldIn) {
-	      explode(world, worldIn, (LivingEntity)null);
+	   public static void explode(World world, @NotNull BlockPos worldIn) {
+	      explode(world, worldIn, null);
 	   }
 	   
 	   @Deprecated
 	   private static void explode(World worldIn, BlockPos pos, @Nullable LivingEntity entityIn) {
-	      if (!worldIn.isRemote) {
-	    	  DarkMatterEntity tntentity = new DarkMatterEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, entityIn);
-	         worldIn.addEntity(tntentity);
-	         worldIn.playSound((PlayerEntity)null, tntentity.getPosX(), tntentity.getPosY(), tntentity.getPosZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	      if (!worldIn.isClientSide) {
+	    	  DarkMatterEntity tntentity = new DarkMatterEntity(worldIn, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, entityIn);
+	         worldIn.addFreshEntity(tntentity);
+	         worldIn.playSound(null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	      }
 	   }
 	   
 	   @Override
-	   public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-	      ItemStack itemstack = player.getHeldItem(handIn);
+	   public @NotNull ActionResultType use(@NotNull BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+	      ItemStack itemstack = player.getItemInHand(handIn);
 	      Item item = itemstack.getItem();
 	      if (item != Items.FLINT_AND_STEEL && item != Items.FIRE_CHARGE) {
-	         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+	         return super.use(state, worldIn, pos, player, handIn, hit);
 	      } else {
-	         catchFire(state, worldIn, pos, hit.getFace(), player);
-	         worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
+	         catchFire(state, worldIn, pos, hit.getDirection(), player);
+	         worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
 	         if (!player.isCreative()) {
 	            if (item == Items.FLINT_AND_STEEL) {
-	               itemstack.damageItem(1, player, (player1) -> {
-	                  player1.sendBreakAnimation(handIn);
-	               });
+	               itemstack.hurtAndBreak(1, player, (player1) -> player1.broadcastBreakEvent(handIn));
 	            } else {
 	               itemstack.shrink(1);
 	            }
 	         }
 
-	         return ActionResultType.func_233537_a_(worldIn.isRemote);
+	         return ActionResultType.sidedSuccess(worldIn.isClientSide);
 	      }
 	   }
 	   
 	   @Override
-	   public void onProjectileCollision(World worldIn, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
-	      if (!worldIn.isRemote) {
-	         Entity entity = projectile.func_234616_v_();
-	         if (projectile.isBurning()) {
-	            BlockPos blockpos = hit.getPos();
+	   public void onProjectileHit(World worldIn, @NotNull BlockState state, @NotNull BlockRayTraceResult hit, @NotNull ProjectileEntity projectile) {
+	      if (!worldIn.isClientSide) {
+	         Entity entity = projectile.getOwner();
+	         if (projectile.isOnFire()) {
+	            BlockPos blockpos = hit.getBlockPos();
 	            catchFire(state, worldIn, blockpos, null, entity instanceof LivingEntity ? (LivingEntity)entity : null);
 	            worldIn.removeBlock(blockpos, false);
 	         }
@@ -130,12 +129,12 @@ public class DarkMatterBlock extends TNTBlock {
 	   }
 
 	   @Override
-	   public boolean canDropFromExplosion(Explosion explosionIn) {
+	   public boolean dropFromExplosion(@NotNull Explosion explosionIn) {
 	      return false;
 	   }
 	   
 	   @Override
-	   protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	   protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 	      builder.add(UNSTABLE);
 	   }
 }	   

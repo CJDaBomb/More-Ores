@@ -60,8 +60,10 @@ public class MoreOres {
 			super(label);
 		}
 
+
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
+			// TODO Auto-generated method stub
 			return ItemInit.JASPER.get().getDefaultInstance();
 		}
 
@@ -74,9 +76,10 @@ public class MoreOres {
 		}
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return ItemInit.JASPER_BLOCK.get().getDefaultInstance();
 		}
+
 
 	}
 
@@ -87,9 +90,10 @@ public class MoreOres {
 		}
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return ItemInit.ROSE_QUARTZ.get().getDefaultInstance();
 		}
+
 
 	}
 }

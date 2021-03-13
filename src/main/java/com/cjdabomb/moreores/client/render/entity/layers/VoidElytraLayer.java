@@ -18,6 +18,7 @@ import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 
 public class VoidElytraLayer<T extends LivingEntity, M extends BipedModel<T>> extends LayerRenderer<T, M> {
@@ -37,16 +38,16 @@ public class VoidElytraLayer<T extends LivingEntity, M extends BipedModel<T>> ex
 	
 	
 	@Override
-	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-	      ItemStack itemstack = entitylivingbaseIn.getItemStackFromSlot(EquipmentSlotType.CHEST);
+	public void render(@NotNull MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	      ItemStack itemstack = entitylivingbaseIn.getItemBySlot(EquipmentSlotType.CHEST);
 	      if (shouldRender(itemstack, entitylivingbaseIn)) {
 	         ResourceLocation resourcelocation;
 	         if (entitylivingbaseIn instanceof AbstractClientPlayerEntity) {
 	            AbstractClientPlayerEntity abstractclientplayerentity = (AbstractClientPlayerEntity)entitylivingbaseIn;
-	            if (abstractclientplayerentity.isPlayerInfoSet() && abstractclientplayerentity.getLocationElytra() != null) {
-	               resourcelocation = abstractclientplayerentity.getLocationElytra();
-	            } else if (abstractclientplayerentity.hasPlayerInfo() && abstractclientplayerentity.getLocationCape() != null && abstractclientplayerentity.isWearing(PlayerModelPart.CAPE)) {
-	               resourcelocation = abstractclientplayerentity.getLocationCape();
+	            if (abstractclientplayerentity.isElytraLoaded() && abstractclientplayerentity.getElytraTextureLocation() != null) {
+	               resourcelocation = abstractclientplayerentity.getElytraTextureLocation();
+	            } else if (abstractclientplayerentity.isCapeLoaded() && abstractclientplayerentity.getCloakTextureLocation() != null && abstractclientplayerentity.isModelPartShown(PlayerModelPart.CAPE)) {
+	               resourcelocation = abstractclientplayerentity.getCloakTextureLocation();
 	            } else {
 	               resourcelocation = getElytraTexture(itemstack, entitylivingbaseIn);
 	            }
@@ -54,13 +55,13 @@ public class VoidElytraLayer<T extends LivingEntity, M extends BipedModel<T>> ex
 	            resourcelocation = getElytraTexture(itemstack, entitylivingbaseIn);
 	         }
 
-	         matrixStackIn.push();
+	         matrixStackIn.pushPose();
 	         matrixStackIn.translate(0.0D, 0.0D, 0.125D);
-	         this.getEntityModel().copyModelAttributesTo(this.modelVoidElytra);
-	         this.modelVoidElytra.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-	         IVertexBuilder ivertexbuilder = ItemRenderer.getArmorVertexBuilder(bufferIn, RenderType.getArmorCutoutNoCull(resourcelocation), false, itemstack.hasEffect());
-	         this.modelVoidElytra.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-	         matrixStackIn.pop();
+	         this.getParentModel().copyPropertiesTo(this.modelVoidElytra);
+	         this.modelVoidElytra.setupAnim(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+	         IVertexBuilder ivertexbuilder = ItemRenderer.getArmorFoilBuffer(bufferIn, RenderType.armorCutoutNoCull(resourcelocation), false, itemstack.hasFoil());
+	         this.modelVoidElytra.renderToBuffer(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+	         matrixStackIn.popPose();
 	      }
 	   }
 

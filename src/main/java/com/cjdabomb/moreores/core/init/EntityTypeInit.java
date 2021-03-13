@@ -14,7 +14,7 @@ public class EntityTypeInit {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MoreOres.MOD_ID);
 	
 	
-	public static final RegistryObject<EntityType<DarkMatterEntity>> DARK_MATTER = ENTITIES.register("dark_matter", () -> EntityType.Builder.<DarkMatterEntity>create
-			(DarkMatterEntity::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).trackingRange(10).func_233608_b_(10).build("dark_matter"));
+	public static final RegistryObject<EntityType<DarkMatterEntity>> DARK_MATTER = ENTITIES.register("dark_matter", () -> EntityType.Builder.<DarkMatterEntity>of
+			(DarkMatterEntity::new, EntityClassification.MISC).fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10).build("dark_matter"));
 
 }

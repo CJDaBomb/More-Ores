@@ -23,7 +23,7 @@ public class EventHandler {
 	
 	@SubscribeEvent
     public static void onLivingHurtEvent(LivingHurtEvent event){
-        if(event.getEntity().world.isRemote()) return;
+        if(event.getEntity().level.isClientSide()) return;
         if (!(event.getEntityLiving() instanceof ServerPlayerEntity)) return;
 
         ServerPlayerEntity player = (ServerPlayerEntity)event.getEntityLiving();
@@ -32,7 +32,7 @@ public class EventHandler {
             ItemStack itemstack = null;
 
             for (Hand hand : Hand.values()) {
-                ItemStack itemstack1 = player.getHeldItem(hand);
+                ItemStack itemstack1 = player.getItemInHand(hand);
                 if (itemstack1.getItem() == ItemInit.EMERALD_TOTEM.get() || itemstack1.getItem() == ItemInit.DIAMOND_TOTEM.get() ) {
                     itemstack = itemstack1.copy();
                     itemstack1.shrink(1);
@@ -42,27 +42,27 @@ public class EventHandler {
 
             if (itemstack != null) {
                 player.setHealth(1.0F);
-                player.clearActivePotions();
+                player.removeAllEffects();
                 if(itemstack.getItem() == ItemInit.EMERALD_TOTEM.get()){
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 9000, 1));
-                player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 10000, 1));
-                player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 8000, 0));
-                player.addPotionEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 1000000, 4));
+                player.addEffect(new EffectInstance(Effects.REGENERATION, 9000, 1));
+                player.addEffect(new EffectInstance(Effects.ABSORPTION, 10000, 1));
+                player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 8000, 0));
+                player.addEffect(new EffectInstance(Effects.HERO_OF_THE_VILLAGE, 1000000, 4));
                 ItemStack apple = new ItemStack(Items.GOLDEN_APPLE);
-                player.addItemStackToInventory(apple);
+                player.addItem(apple);
                 }
                 else if(itemstack.getItem() == ItemInit.DIAMOND_TOTEM.get()){
-                	 player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 9000, 1));
-                     player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 10000, 1));
-                     player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 8000, 0));
-                     player.addPotionEffect(new EffectInstance(Effects.SPEED, 9000, 2));
-                     player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 10000, 2));
-                     player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 8000, 1));
-                     player.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 8000, 0));
+                	 player.addEffect(new EffectInstance(Effects.REGENERATION, 9000, 1));
+                     player.addEffect(new EffectInstance(Effects.ABSORPTION, 10000, 1));
+                     player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 8000, 0));
+                     player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 9000, 2));
+                     player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 10000, 2));
+                     player.addEffect(new EffectInstance(Effects.JUMP, 8000, 1));
+                     player.addEffect(new EffectInstance(Effects.INVISIBILITY, 8000, 0));
                      ItemStack apple2 = new ItemStack(ItemInit.DIAMOND_APPLE.get());
-                     player.addItemStackToInventory(apple2);
+                     player.addItem(apple2);
                 }
-                player.world.setEntityState(player, (byte) 35);
+                player.level.broadcastEntityEvent(player, (byte) 35);
             }
             if(itemstack != null) event.setCanceled(true);
         }
@@ -74,14 +74,14 @@ public class EventHandler {
 		
 		if(event.getItemStack().getItem() == Items.TOTEM_OF_UNDYING) {
 				if(event.getWorld().getBlockState(event.getPos()).getBlock() == Blocks.DIAMOND_BLOCK) {
-					event.getWorld().setBlockState(event.getPos(), Blocks.AIR.getDefaultState(), Constants.BlockFlags.BLOCK_UPDATE);
+					event.getWorld().setBlock(event.getPos(), Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 					event.getItemStack().shrink(1);
 						if(Math.random() < .5f) {
 							ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), ItemInit.DIAMOND_TOTEM.get().getDefaultInstance());
 						}
 				}
 				else if (event.getWorld().getBlockState(event.getPos()).getBlock() == Blocks.EMERALD_BLOCK) {
-						event.getWorld().setBlockState(event.getPos(), Blocks.AIR.getDefaultState(), Constants.BlockFlags.BLOCK_UPDATE);
+						event.getWorld().setBlock(event.getPos(), Blocks.AIR.defaultBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 						event.getItemStack().shrink(1);
 							if(Math.random() < .5f) {
 								ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), ItemInit.EMERALD_TOTEM.get().getDefaultInstance());

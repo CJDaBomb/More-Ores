@@ -26,11 +26,11 @@ public class ModClientEvents {
 
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(ContainerTypeInit.JEWELER_BARREL_CONTAINER.get(), JewelerBarrelScreen::new);
+		ScreenManager.register(ContainerTypeInit.JEWELER_BARREL_CONTAINER.get(), JewelerBarrelScreen::new);
 		
 		
 		
-		Map<String, PlayerRenderer> skinMap = event.getMinecraftSupplier().get().getRenderManager().getSkinMap();
+		Map<String, PlayerRenderer> skinMap = event.getMinecraftSupplier().get().getEntityRenderDispatcher().getSkinMap();
 		addVoidElytraLayer(skinMap.get("default"));
 		addVoidElytraLayer(skinMap.get("slim"));
 		
@@ -39,7 +39,7 @@ public class ModClientEvents {
 
 	public static void addVoidElytraLayer(PlayerRenderer entityRendererIn) {
 		List<LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>>> layers = ObfuscationReflectionHelper
-				.getPrivateValue(LivingRenderer.class, entityRendererIn, "field_177097_h");
+				.getPrivateValue(LivingRenderer.class, entityRendererIn, "layers");
 		if (layers != null) {
 			layers.add(new VoidElytraLayer<>(entityRendererIn));
 		}

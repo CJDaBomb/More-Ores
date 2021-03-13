@@ -45,6 +45,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
 public class AlloySynthesizerTileEntity extends InventoryTile implements ITickableTileEntity, INamedContainerProvider {
     public static IRecipeType<?> getRecipeType() {
@@ -57,9 +58,9 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     public int smelttime = 0;
     public int burntime1 = 0;
     public int burntime2 = 0;
-    public int totalburntime1 = 300;
-    public int totalburntime2 = 300;
-    public int recipeTime = 300;
+    public int totalburntime1 = 200;
+    public int totalburntime2 = 200;
+    public int recipeTime = 200;
 
     public int getRecipeID() {
         return recipeID;
@@ -67,7 +68,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     private int recipeID = -1;
     @SuppressWarnings("unused")
-	private int tick = 0;
+	private final int tick = 0;
 
 
     //*Set the Recipe remotely
@@ -78,15 +79,15 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
         } else {
             this.recipeID = -1;
         }
-        this.markDirty();
+        this.setChanged();
     }
 
     private AlloySmeltingRecipe recipeIn;
 
     //*read NBT from SaveFile to get the Data
     @Override
-    public void read(BlockState state, @Nonnull CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(@NotNull BlockState state, @Nonnull CompoundNBT compound) {
+        super.load(state, compound);
         smelttime = compound.getInt("smelttime");
         burntime1 = compound.getInt("bt1");
         burntime2 = compound.getInt("bt2");
@@ -102,8 +103,8 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     //*Write Data to Disk when needed
     @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(@Nonnull CompoundNBT compound) {
+        super.save(compound);
         compound.putInt("smelttime", smelttime);
         compound.putInt("bt1", burntime1);
         compound.putInt("bt2", burntime2);
@@ -118,7 +119,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     //*Get the Recipe by the Recipe ID
     public AlloySmeltingRecipe recipeFromId(int id) {
-        Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, this.getWorld());
+        Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, this.getLevel());
         if (id >= 0 && recipes.size() - 1 >= id && recipes.toArray()[id] instanceof AlloySmeltingRecipe) {
             return (AlloySmeltingRecipe) recipes.toArray()[id];
         }
@@ -128,7 +129,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     //*Get the ID by the Recipe
     public Integer idFromRecipe(AlloySmeltingRecipe recipeIn) {
         int i = 0;
-        Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, this.getWorld());
+        Set<IRecipe<?>> recipes = AlloySynthesizerTileEntity.findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, this.getLevel());
         for (IRecipe<?> r : recipes) {
             if (r.equals(recipeIn)) {
                 return i;
@@ -160,8 +161,8 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     //*Validate the Item the Hopper wants to put in
     @Override
-    public boolean canInsertItem(int index, @Nonnull ItemStack itemStackIn, @Nullable Direction direction) {
-        return isItemValidForSlot(index, itemStackIn);
+    public boolean canPlaceItemThroughFace(int index, @Nonnull ItemStack itemStackIn, @Nullable Direction direction) {
+        return canPlaceItem(index, itemStackIn);
     }
 
     //*Select the Fuel slot based on the other one/also allows from Items to pass in from the Side
@@ -191,7 +192,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     //*Check if the Item is actually valid for a given Slot Index
     @Override
-    public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack) {
+    public boolean canPlaceItem(int index, @Nonnull ItemStack stack) {
         if (index == 4) {
             return false;
         }
@@ -229,7 +230,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     //*Hopper Item Extraction
     @Override
-    public boolean canExtractItem(int index, @Nonnull ItemStack stack, @Nonnull Direction direction) {
+    public boolean canTakeItemThroughFace(int index, @Nonnull ItemStack stack, @Nonnull Direction direction) {
         return index == 4 && this.getItemInSlot(4).getCount() > 0;
     }
 
@@ -241,7 +242,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
     public static List<IRecipe<?>> getRecipesWithInput(IRecipeType<?> type, World world, Ingredient ingredient) {
         Set<IRecipe<?>> recipes = findRecipeByType(IRecipeType.SMELTING, world);
-        LootTable table = Objects.requireNonNull(world.getServer()).getLootTableManager().getLootTableFromLocation(new ResourceLocation(""));
+        LootTable table = Objects.requireNonNull(world.getServer()).getLootTables().get(new ResourceLocation(""));
         try {
             Field f = table.getClass().getDeclaredField("combinedFunctions");
             f.setAccessible(true);
@@ -259,10 +260,10 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     @Override
     public void tick() {
         //*If the World is Null return immediately
-        if (this.world == null) {
+        if (this.level == null) {
             return;
             //*This is for the Client Render to have the Screen Update
-        } else if (this.world.isRemote) {
+        } else if (this.level.isClientSide) {
             if (this.smelttime < this.recipeTime) {
                 this.smelttime++;
             } else {
@@ -283,10 +284,10 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
             this.recipeIn = recipeFromId(recipeID);
         }
         //*If there is a valid Recipe matching the Items in the Slot without a selected Recipe, select it
-        if (getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.world) != null && this.recipeIn == null) {
-            this.recipeIn = getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.world);
+        if (getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.level) != null && this.recipeIn == null) {
+            this.recipeIn = getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.level);
             //*If the Recipe becomes invalid it is nulled
-        } else if (getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.world) == null && this.recipeIn != null && !this.getItemInSlot(1).isEmpty() && !this.getItemInSlot(0).isEmpty()) {
+        } else if (getRecipe(this.getItemInSlot(0), this.getItemInSlot(1), this.level) == null && this.recipeIn != null && !this.getItemInSlot(1).isEmpty() && !this.getItemInSlot(0).isEmpty()) {
             this.recipeIn = null;
         }
         //*Check if there needs to be more fuel
@@ -333,16 +334,16 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
             }
             updateRender = true;
             this.isSmelting = false;
-            if (this.world != null) {
-                this.world.setBlockState(this.getPos(), this.world.getBlockState(this.getPos()).with(AlloySynthesizerBlock.LIT, false), 3);
+            if (this.level != null) {
+                this.level.setBlock(this.getBlockPos(), this.level.getBlockState(this.getBlockPos()).setValue(AlloySynthesizerBlock.LIT, false), 3);
             }
         }
         //*Check if the Furnace is operating
         this.isBurning = this.burntime1 > 0 && this.burntime2 > 0;
         if (!this.isBurning && this.isSmelting) {
             this.isSmelting = false;
-            if (this.world != null) {
-                this.world.setBlockState(this.getPos(), this.world.getBlockState(this.getPos()).with(AlloySynthesizerBlock.LIT, false), 3);
+            if (this.level != null) {
+                this.level.setBlock(this.getBlockPos(), this.level.getBlockState(this.getBlockPos()).setValue(AlloySynthesizerBlock.LIT, false), 3);
             }
         }
         //*Update the Render
@@ -350,7 +351,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
             super.updateTile();
         }
         //*Tell the Game it needs to save Data because values changed
-        this.markDirty();
+        this.setChanged();
     }
 
     //*Check if Recipe can be actually done
@@ -377,7 +378,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
         return false;
     }
 
-    //*Check and Overwatch the Smelting Process
+    //*Check and Oversee the Smelting Process
     public boolean checkSmelting() {
         //initialize Smelting
         //*If there is no Fuel/recipe is null no smelting possible
@@ -388,8 +389,8 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
                 return false;
             } else {
                 this.isSmelting = true;
-                if (this.world != null) {
-                    this.world.setBlockState(this.getPos(), this.world.getBlockState(this.getPos()).with(AlloySynthesizerBlock.LIT, true), 3);
+                if (this.level != null) {
+                    this.level.setBlock(this.getBlockPos(), this.level.getBlockState(this.getBlockPos()).setValue(AlloySynthesizerBlock.LIT, true), 3);
                 }
                 this.smelttime = 0;
                 this.smelttime++;
@@ -401,8 +402,8 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
             //finished smelting the Recipe
         } else if (this.smelttime == this.recipeTime) {
             this.smelttime = 0;
-            int stackcount = this.recipeIn.getRecipeOutput().getCount() + this.getInventory().getStackInSlot(4).getCount();
-            this.getInventory().setStackInSlot(4, new ItemStack(this.recipeIn.getRecipeOutput().getItem(), stackcount));
+            int stackcount = this.recipeIn.getResultItem().getCount() + this.getInventory().getStackInSlot(4).getCount();
+            this.getInventory().setStackInSlot(4, new ItemStack(this.recipeIn.getResultItem().getItem(), stackcount));
             if (this.getInventory().getStackInSlot(0).getItem().equals(this.recipeIn.getInput1Stack().getItem())) {
                 this.getInventory().extractItem(0, this.recipeIn.getInput1Stack().getCount(), false);
                 this.getInventory().extractItem(1, this.recipeIn.getInput2Stack().getCount(), false);
@@ -429,16 +430,16 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     //*Gets the Recipe from the World Object
     @Nullable
     private AlloySmeltingRecipe getRecipe(ItemStack input1, ItemStack input2, World w) {
-        if (input1 == null || this.world == null || input2 == null) {
+        if (input1 == null || this.level == null || input2 == null) {
             return null;
         }
         Set<IRecipe<?>> recipes = findRecipeByType(RecipeSerializerInit.ALLOY_TYPE, w);
         for (IRecipe<?> recipe : recipes) {
-            if (recipe instanceof AlloySmeltingRecipe && ((AlloySmeltingRecipe) recipe).matches(new RecipeWrapper(this.getInventory()), world)) {
+            if (recipe instanceof AlloySmeltingRecipe && ((AlloySmeltingRecipe) recipe).matches(new RecipeWrapper(this.getInventory()), level)) {
                 return (AlloySmeltingRecipe) recipe;
             }
         }
-        findRecipeByType(IRecipeType.SMELTING, world);
+        findRecipeByType(IRecipeType.SMELTING, level);
         return null;
     }
 
@@ -450,7 +451,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     @OnlyIn(Dist.CLIENT)
     public static Set<IRecipe<?>> findRecipeByType(IRecipeType<IAlloySmeltingRecipe> alloyType) {
         @SuppressWarnings("resource")
-		ClientWorld world = Minecraft.getInstance().world;
+		ClientWorld world = Minecraft.getInstance().level;
         return world != null ? world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe.getType().equals(getRecipeType())).collect(Collectors.toSet())
                 : new HashSet<>();
     }
@@ -460,9 +461,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
         Set<IRecipe<?>> recipes = findRecipeByType(typeIn, w);
         for (IRecipe<?> recipe : recipes) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
-            ingredients.forEach(ingredient -> {
-                inputs.addAll(Arrays.asList(ingredient.getMatchingStacks()));
-            });
+            ingredients.forEach(ingredient -> inputs.addAll(Arrays.asList(ingredient.getItems())));
         }
         return inputs;
     }
@@ -470,7 +469,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
     //*Help Method for the Hopper
     @Nonnull
     @Override
-    public ISidedInventory createInventory(@Nonnull BlockState state, @Nonnull IWorld world, @Nonnull BlockPos pos) {
+    public ISidedInventory getContainer(@Nonnull BlockState state, @Nonnull IWorld world, @Nonnull BlockPos pos) {
         return this;
     }
 
@@ -481,7 +480,7 @@ public class AlloySynthesizerTileEntity extends InventoryTile implements ITickab
 
 	@Nullable
 	@Override
-	public Container createMenu(int index, PlayerInventory inventory, PlayerEntity player) {
+	public Container createMenu(int index, @NotNull PlayerInventory inventory, @NotNull PlayerEntity player) {
 		// TODO Auto-generated method stub
 		return new AlloySynthesizerContainer(index, inventory, this);
 	}

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class LapisAppleItem extends Item{
 	
@@ -15,16 +16,16 @@ public class LapisAppleItem extends Item{
 		super(builder);
 	}
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+	public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving) {
 			if(random.nextFloat() < 0.5f) {	
 			
 			ItemStack stack1 = new ItemStack(Items.ENCHANTED_BOOK);
-	        stack1.addEnchantment(Enchantments.MENDING, 1);
+	        stack1.enchant(Enchantments.MENDING, 1);
 			ItemHandlerHelper.giveItemToPlayer((PlayerEntity) entityLiving, stack1);
 			
 			
 		}
-		return super.onItemUseFinish(stack, worldIn, entityLiving);
+		return super.finishUsingItem(stack, worldIn, entityLiving);
 	} 
 
 

@@ -8,13 +8,14 @@ import com.cjdabomb.moreores.core.init.ContainerTypeInit;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+
+import javax.annotation.Nonnull;
 
 public class JewelerBarrelContainer extends Container {
 
@@ -26,26 +27,26 @@ public class JewelerBarrelContainer extends Container {
 			final JewelerBarrelTileEntity te) {
 		super(ContainerTypeInit.JEWELER_BARREL_CONTAINER.get(), windowId);
 		this.te = te;
-		this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
+		this.canInteractWithCallable = IWorldPosCallable.create(Objects.requireNonNull(te.getLevel()), te.getBlockPos());
 		int i = 0;
 
 		int slotSizePlus2 = 18;
 		for (int column = 0; column < 12; column++) {
 			for (int row = 0; row < upgrade + 4; row++) {
-				this.addSlot(new Slot((IInventory) te, i++, column * slotSizePlus2, row * slotSizePlus2));
+				this.addSlot(new Slot(te, i++, column * slotSizePlus2, row * slotSizePlus2));
 			}
 		}
 
 		if (upgrade == 0) {
-			this.addSlot(new Slot((IInventory) te, 97, 80, 30));
+			this.addSlot(new Slot(te, 97, 80, 30));
 		} else if (upgrade == 1) {
-			this.addSlot(new Slot((IInventory) te, 97, 80, 46));
+			this.addSlot(new Slot( te, 97, 80, 46));
 		} else if (upgrade == 2) {
-			this.addSlot(new Slot((IInventory) te, 97, 80, 62));
+			this.addSlot(new Slot( te, 97, 80, 62));
 		} else if (upgrade == 3) {
-			this.addSlot(new Slot((IInventory) te, 97, 80, 78));
+			this.addSlot(new Slot( te, 97, 80, 78));
 		} else if (upgrade == 4) {
-			this.addSlot(new Slot((IInventory) te, 97, 80, 94));
+			this.addSlot(new Slot( te, 97, 80, 94));
 		}
 
 		for (int row = 0; row < 7; row++) {
@@ -66,7 +67,7 @@ public class JewelerBarrelContainer extends Container {
 	private static JewelerBarrelTileEntity getTileEntity(final PlayerInventory playerInv, final PacketBuffer data) {
 		Objects.requireNonNull(playerInv, "Player Inventory cannot be null.");
 		Objects.requireNonNull(data, "Packer Buffer cannot be null.");
-		final TileEntity te = playerInv.player.world.getTileEntity(data.readBlockPos());
+		final TileEntity te = playerInv.player.level.getBlockEntity(data.readBlockPos());
 		if (te instanceof JewelerBarrelTileEntity) {
 			return (JewelerBarrelTileEntity) te;
 		}
@@ -74,37 +75,37 @@ public class JewelerBarrelContainer extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
 		// TODO Auto-generated method stub
-		return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.JEWELER_BARREL.get());
+		return stillValid(canInteractWithCallable, playerIn, BlockInit.JEWELER_BARREL.get());
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
 
 		ItemStack stack = ItemStack.EMPTY;
-		Slot slot = this.inventorySlots.get(index);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack stack2 = slot.getStack();
+		Slot slot = this.slots.get(index);
+		if (slot != null && slot.hasItem()) {
+			ItemStack stack2 = slot.getItem();
 			stack = stack2.copy();
 			if (index < 36
-					&& !this.mergeItemStack(stack2, JewelerBarrelTileEntity.slots, this.inventorySlots.size(), true)) {
+					&& !this.moveItemStackTo(stack2, JewelerBarrelTileEntity.slots, this.slots.size(), true)) {
 				return ItemStack.EMPTY;
 			}
-			if (!this.mergeItemStack(stack2, 0, JewelerBarrelTileEntity.slots, false)) {
+			if (!this.moveItemStackTo(stack2, 0, JewelerBarrelTileEntity.slots, false)) {
 				return ItemStack.EMPTY;
 			}
 			if (stack2.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
+				slot.set(ItemStack.EMPTY);
 			} else {
-				slot.onSlotChanged();
+				slot.setChanged();
 			}
 		}
 		return stack;
 	}
 
 	public void syncContainer() {
-		this.detectAndSendChanges();
+		this.broadcastChanges();
 	}
 
 }

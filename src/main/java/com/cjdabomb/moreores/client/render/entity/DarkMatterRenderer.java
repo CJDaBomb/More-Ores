@@ -13,21 +13,22 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class DarkMatterRenderer extends EntityRenderer<DarkMatterEntity> {
    public DarkMatterRenderer(EntityRendererManager renderManagerIn) {
       super(renderManagerIn);
-      this.shadowSize = 0.5F;
+      this.shadowRadius = 0.5F;
    }
    public static final ResourceLocation darkMatter = new ResourceLocation("moreores:textures/entities/dark_matter");
 
    @Override
-   public void render(DarkMatterEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-      matrixStackIn.push();
+   public void render(DarkMatterEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int packedLightIn) {
+      matrixStackIn.pushPose();
       matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-      if ((float)entityIn.getFuse() - partialTicks + 1.0F < 10.0F) {
-         float f = 1.0F - ((float)entityIn.getFuse() - partialTicks + 1.0F) / 10.0F;
+      if ((float)entityIn.getLife() - partialTicks + 1.0F < 10.0F) {
+         float f = 1.0F - ((float)entityIn.getLife() - partialTicks + 1.0F) / 10.0F;
          f = MathHelper.clamp(f, 0.0F, 1.0F);
          f = f * f;
          f = f * f;
@@ -35,11 +36,11 @@ public class DarkMatterRenderer extends EntityRenderer<DarkMatterEntity> {
          matrixStackIn.scale(f1, f1, f1);
       }
 
-      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+      matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
       matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
-      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
-      TNTMinecartRenderer.renderTntFlash(BlockInit.DARK_MATTER.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
-      matrixStackIn.pop();
+      matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+      TNTMinecartRenderer.renderWhiteSolidBlock(BlockInit.DARK_MATTER.get().defaultBlockState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getLife() / 5 % 2 == 0);
+      matrixStackIn.popPose();
       super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
    }
 
@@ -50,7 +51,7 @@ public class DarkMatterRenderer extends EntityRenderer<DarkMatterEntity> {
     */
 
    	@Override
-  	public ResourceLocation getEntityTexture(DarkMatterEntity entity) {
+  	public @NotNull ResourceLocation getTextureLocation(@NotNull DarkMatterEntity entity) {
 	 return darkMatter;
   	}
 

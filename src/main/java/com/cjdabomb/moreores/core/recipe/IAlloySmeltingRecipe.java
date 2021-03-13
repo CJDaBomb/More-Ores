@@ -22,7 +22,7 @@ public interface IAlloySmeltingRecipe extends IRecipe<RecipeWrapper> {
     }
 
     @Override
-    default boolean canFit(int width, int height) {
+    default boolean canCraftInDimensions(int width, int height) {
         return false;
     }
 

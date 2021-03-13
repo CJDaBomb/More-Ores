@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
+import java.util.Objects;
+
 @EventBusSubscriber(modid = MoreOres.MOD_ID, bus = Bus.MOD)
 @ObjectHolder(MoreOres.MOD_ID)
 public class PointOfInterestTypes {
@@ -23,7 +25,7 @@ public class PointOfInterestTypes {
     {	
         IForgeRegistry<PointOfInterestType> registry = event.getRegistry();
         
-        registry.register(VillagerUtil.pointOfInterestType("jeweler", VillagerUtil.getAllStates(BlockInit.JEWELER_BARREL.get()), 1, 1)
+        registry.register(Objects.requireNonNull(VillagerUtil.pointOfInterestType("jeweler", VillagerUtil.getAllStates(BlockInit.JEWELER_BARREL.get()), 1, 1))
         		.setRegistryName(MoreOres.MOD_ID, "jeweler"));
        
     }
