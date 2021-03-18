@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -81,7 +82,7 @@ public class JewelerBarrelContainer extends Container {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+	public @NotNull ItemStack quickMoveStack(@NotNull PlayerEntity playerIn, int index) {
 
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);

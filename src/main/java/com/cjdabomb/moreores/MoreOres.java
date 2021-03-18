@@ -20,6 +20,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.jetbrains.annotations.NotNull;
 
 @Mod(MoreOres.MOD_ID)
 public class MoreOres {
@@ -62,7 +63,7 @@ public class MoreOres {
 
 
 		@Override
-		public ItemStack makeIcon() {
+		public @NotNull ItemStack makeIcon() {
 			// TODO Auto-generated method stub
 			return ItemInit.JASPER.get().getDefaultInstance();
 		}
@@ -76,7 +77,7 @@ public class MoreOres {
 		}
 
 		@Override
-		public ItemStack makeIcon() {
+		public @NotNull ItemStack makeIcon() {
 			return ItemInit.JASPER_BLOCK.get().getDefaultInstance();
 		}
 
@@ -90,7 +91,7 @@ public class MoreOres {
 		}
 
 		@Override
-		public ItemStack makeIcon() {
+		public @NotNull ItemStack makeIcon() {
 			return ItemInit.ROSE_QUARTZ.get().getDefaultInstance();
 		}
 

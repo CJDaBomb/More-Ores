@@ -5,7 +5,6 @@ import com.cjdabomb.moreores.common.containers.JewelerBarrelContainer;
 import com.cjdabomb.moreores.common.te.JewelerBarrelTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -19,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer> {
+public class JewelerBarrelScreen<T extends JewelerBarrelContainer> extends ContainerScreen<T> {
 
 	private static final ResourceLocation JEWELER_BARREL_GUI = new ResourceLocation(MoreOres.MOD_ID,
 			"textures/gui/jeweler_barrel.png");
@@ -38,11 +37,11 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 
 	public PlayerEntity player;
 
-	private Button myButton;
+	private final Button myButton;
 	final int relX = (this.width - this.imageWidth) / 2;
 	final int relY = (this.height - this.imageHeight) / 2;
 
-	public JewelerBarrelScreen(JewelerBarrelContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+	public JewelerBarrelScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
 
 		this.myButton = new Button(relX + 10, relY + 10, 160, 20, // pos and size
@@ -70,12 +69,6 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 		}
 	}
 
-
-	public JewelerBarrelScreen(PlayerEntity player, JewelerBarrelContainer container, PlayerInventory playerInventory) {
-		super(container, playerInventory, new StringTextComponent(""));
-        this.player = player;
-
-    }
 
 
 	private void buttonPressed() {
@@ -162,9 +155,6 @@ public class JewelerBarrelScreen extends ContainerScreen<JewelerBarrelContainer>
 	protected void init() {
 		super.init();
 	}
-	
-	public void open(PlayerEntity player) {
-		Minecraft.getInstance().setScreen(new JewelerBarrelScreen(player, menu, inventory));
-	}
+
 
 }

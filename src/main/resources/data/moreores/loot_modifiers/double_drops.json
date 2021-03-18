@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:alexandrite_axe"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:alexandrite_pickaxe"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:alexandrite_shovel"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:alexandrite_sword"
+          }
+        }
+      ]
+    }
+  ]
+}

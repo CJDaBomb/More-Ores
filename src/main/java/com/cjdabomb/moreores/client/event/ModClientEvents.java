@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.cjdabomb.moreores.MoreOres;
 import com.cjdabomb.moreores.client.render.entity.layers.VoidElytraLayer;
+import com.cjdabomb.moreores.client.screens.AlloySynthesizerScreen;
 import com.cjdabomb.moreores.client.screens.JewelerBarrelScreen;
 import com.cjdabomb.moreores.core.init.ContainerTypeInit;
 
@@ -27,7 +28,7 @@ public class ModClientEvents {
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
 		ScreenManager.register(ContainerTypeInit.JEWELER_BARREL_CONTAINER.get(), JewelerBarrelScreen::new);
-		
+		ScreenManager.register(ContainerTypeInit.ALLOY_SYNTHESIZER_CONTAINER.get(), AlloySynthesizerScreen::new);
 		
 		
 		Map<String, PlayerRenderer> skinMap = event.getMinecraftSupplier().get().getEntityRenderDispatcher().getSkinMap();

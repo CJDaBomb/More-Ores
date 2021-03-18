@@ -18,6 +18,7 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class AlloySynthesizerContainer extends AbstractMachineContainer {
 	/**
@@ -69,7 +70,7 @@ public class AlloySynthesizerContainer extends AbstractMachineContainer {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+	public @NotNull ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
 		Slot slot = this.slots.get(index);
 		ItemStack slotStack = slot.getItem().copy();
 		// 36/37 SmeltSlots 38/39FuelSlots 40 OutputSLot

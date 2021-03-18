@@ -23,11 +23,12 @@ public abstract class AbstractMachineContainer extends Container {
             this.addSlot(new SlotItemHandler(playerInventory, k, 8 + k * 18, 142));
         }
     }
+
     @Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
 }

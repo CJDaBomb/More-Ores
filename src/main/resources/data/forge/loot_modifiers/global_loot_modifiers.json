@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "entries": [
+    "moreores:smelting",
+    "moreores:double_drop_smelting",
+    "moreores:double_drops"
+  ]
+}

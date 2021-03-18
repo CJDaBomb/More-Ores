@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:sunstone_axe"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:sunstone_pickaxe"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:sunstone_shovel"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "moreores:sunstone_sword"
+          }
+        }
+      ]
+    }
+  ]
+}

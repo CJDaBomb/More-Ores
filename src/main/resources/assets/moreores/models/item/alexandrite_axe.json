@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
     "textures": {
-    	"layer0": "moreores:items/alexandrite_axe",
-    	"layer1": "moreores:items/iron_rod"      
+    	"layer0": "moreores:items/iron_rod",
+    	"layer1": "moreores:items/alexandrite_axe"
     }
 }

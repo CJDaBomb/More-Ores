@@ -50,14 +50,15 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity {
 
     @Override
     public boolean isEmpty() {
-
-        for(ItemStack stack : this.items) {
-            return true;
-        }
-        return false;
+        this.unpackLootTable(null);
+        return this.getItems().stream().allMatch(ItemStack::isEmpty);
     }
 
-
+    @Override
+    public ItemStack getItem(int p_70301_1_) {
+        this.unpackLootTable(null);
+        return this.getItems().get(p_70301_1_);
+    }
 
     @Override
     public void setItem(int index, @Nonnull ItemStack stack) {
@@ -79,12 +80,19 @@ public class JewelerBarrelTileEntity extends LockableLootTileEntity {
 
     @Override
     public @NotNull ItemStack removeItem(int p_70298_1_, int p_70298_2_) {
-        return super.removeItem(p_70298_1_, p_70298_2_).split(p_70298_2_);
+        this.unpackLootTable(null);
+        ItemStack itemstack = ItemStackHelper.removeItem(this.getItems(), p_70298_1_, p_70298_2_);
+        if (!itemstack.isEmpty()) {
+            this.setChanged();
+        }
+
+        return itemstack;
     }
 
     @Override
     public @NotNull ItemStack removeItemNoUpdate(int p_70304_1_) {
-        return super.removeItemNoUpdate(p_70304_1_);
+        this.unpackLootTable(null);
+        return ItemStackHelper.takeItem(this.getItems(), p_70304_1_);
     }
 
     @Override

@@ -2,6 +2,6 @@
 	"parent": "item/generated",
     "textures": {
     	"layer0": "moreores:items/sapphire_sword",
-    	"layer1": "moreores:items/iron_rod"    
+    	"layer1": "moreores:items/sword_bit"
     }
 }

@@ -140,32 +140,32 @@ public class ItemInit {
 	
 	// Tools
 	
-	public static final RegistryObject<Item> ALEXANDRITE_AXE = ITEMS.register("alexandrite_axe", 
-			() -> new AxeItem(ModItemTier.ALEXANDRITE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALEXANDRITE_PICKAXE = ITEMS.register("alexandrite_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALEXANDRITE_SHOVEL = ITEMS.register("alexandrite_shovel", 
-			() -> new ShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALEXANDRITE_SWORD = ITEMS.register("alexandrite_sword", 
-			() -> new SwordItem(ModItemTier.ALEXANDRITE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AlexandriteAxeItem> ALEXANDRITE_AXE = ITEMS.register("alexandrite_axe",
+			() -> new AlexandriteAxeItem(ModItemTier.ALEXANDRITE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AlexandritePickaxeItem> ALEXANDRITE_PICKAXE = ITEMS.register("alexandrite_pickaxe",
+			() -> new AlexandritePickaxeItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AlexandriteShovelItem> ALEXANDRITE_SHOVEL = ITEMS.register("alexandrite_shovel",
+			() -> new AlexandriteShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AlexandriteSwordItem> ALEXANDRITE_SWORD = ITEMS.register("alexandrite_sword",
+			() -> new AlexandriteSwordItem(ModItemTier.ALEXANDRITE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 
-	public static final RegistryObject<Item> ALUMINIUM_AXE = ITEMS.register("aluminium_axe", 
-			() -> new AxeItem(ModItemTier.ALUMINIUM, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALUMINIUM_PICKAXE = ITEMS.register("aluminium_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALUMINIUM_SHOVEL = ITEMS.register("aluminium_shovel", 
-			() -> new ShovelItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> ALUMINIUM_SWORD = ITEMS.register("aluminium_sword", 
-			() -> new SwordItem(ModItemTier.ALUMINIUM, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AluminiumAxeItem> ALUMINIUM_AXE = ITEMS.register("aluminium_axe",
+			() -> new AluminiumAxeItem(ModItemTier.ALUMINIUM, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AluminiumPickaxeItem> ALUMINIUM_PICKAXE = ITEMS.register("aluminium_pickaxe",
+			() -> new AluminiumPickaxeItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AluminiumShovelItem> ALUMINIUM_SHOVEL = ITEMS.register("aluminium_shovel",
+			() -> new AluminiumShovelItem(ModItemTier.ALUMINIUM, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<AluminiumSwordItem> ALUMINIUM_SWORD = ITEMS.register("aluminium_sword",
+			() -> new AluminiumSwordItem(ModItemTier.ALUMINIUM, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> COBALT_AXE = ITEMS.register("cobalt_axe", 
-			() -> new AxeItem(ModItemTier.COBALT, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> COBALT_PICKAXE = ITEMS.register("cobalt_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> COBALT_SHOVEL = ITEMS.register("cobalt_shovel", 
-			() -> new ShovelItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> COBALT_SWORD = ITEMS.register("cobalt_sword", 
-			() -> new SwordItem(ModItemTier.COBALT, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<CobaltAxeItem> COBALT_AXE = ITEMS.register("cobalt_axe",
+			() -> new CobaltAxeItem(ModItemTier.COBALT, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<CobaltPickaxeItem> COBALT_PICKAXE = ITEMS.register("cobalt_pickaxe",
+			() -> new CobaltPickaxeItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<CobaltShovelItem> COBALT_SHOVEL = ITEMS.register("cobalt_shovel",
+			() -> new CobaltShovelItem(ModItemTier.COBALT, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<CobaltSwordItem> COBALT_SWORD = ITEMS.register("cobalt_sword",
+			() -> new CobaltSwordItem(ModItemTier.COBALT, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
 	public static final RegistryObject<Item> ELECTRUM_AXE = ITEMS.register("electrum_axe", 
 			() -> new AxeItem(ModItemTier.ELECTRUM, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
@@ -176,14 +176,14 @@ public class ItemInit {
 	public static final RegistryObject<Item> ELECTRUM_SWORD = ITEMS.register("electrum_sword", 
 			() -> new SwordItem(ModItemTier.ELECTRUM, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> JASPER_AXE = ITEMS.register("jasper_axe", 
-			() -> new AxeItem(ModItemTier.JASPER, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> JASPER_PICKAXE = ITEMS.register("jasper_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> JASPER_SHOVEL = ITEMS.register("jasper_shovel", 
-			() -> new ShovelItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> JASPER_SWORD = ITEMS.register("jasper_sword", 
-			() -> new SwordItem(ModItemTier.JASPER, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<JasperAxeItem> JASPER_AXE = ITEMS.register("jasper_axe",
+			() -> new JasperAxeItem(ModItemTier.JASPER, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<JasperPickaxeItem> JASPER_PICKAXE = ITEMS.register("jasper_pickaxe",
+			() -> new JasperPickaxeItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<JasperShovelItem> JASPER_SHOVEL = ITEMS.register("jasper_shovel",
+			() -> new JasperShovelItem(ModItemTier.JASPER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<JasperSwordItem> JASPER_SWORD = ITEMS.register("jasper_sword",
+			() -> new JasperSwordItem(ModItemTier.JASPER, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
 	public static final RegistryObject<Item> ROSE_GOLD_AXE = ITEMS.register("rose_gold_axe", 
 			() -> new AxeItem(ModItemTier.ROSE_GOLD, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
@@ -194,14 +194,14 @@ public class ItemInit {
 	public static final RegistryObject<Item> ROSE_GOLD_SWORD = ITEMS.register("rose_gold_sword", 
 			() -> new SwordItem(ModItemTier.ROSE_GOLD, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> SAPPHIRE_AXE = ITEMS.register("sapphire_axe", 
-			() -> new AxeItem(ModItemTier.SAPPHIRE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel", 
-			() -> new ShovelItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword", 
-			() -> new SwordItem(ModItemTier.SAPPHIRE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SapphireAxeItem> SAPPHIRE_AXE = ITEMS.register("sapphire_axe",
+			() -> new SapphireAxeItem(ModItemTier.SAPPHIRE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SapphirePickaxeItem> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe",
+			() -> new SapphirePickaxeItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SapphireShovelItem> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel",
+			() -> new SapphireShovelItem(ModItemTier.SAPPHIRE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SapphireSwordItem> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword",
+			() -> new SapphireSwordItem(ModItemTier.SAPPHIRE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
 	public static final RegistryObject<ShadowAxeItem> SHADOW_AXE = ITEMS.register("shadow_axe",
 			() -> new ShadowAxeItem(ModItemTier.SHADOW, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
@@ -209,35 +209,35 @@ public class ItemInit {
 			() -> new ShadowPickaxeItem(ModItemTier.SHADOW, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	public static final RegistryObject<ShadowShovelItem> SHADOW_SHOVEL = ITEMS.register("shadow_shovel",
 			() -> new ShadowShovelItem(ModItemTier.SHADOW, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SHADOW_SWORD = ITEMS.register("shadow_sword", 
-			() -> new SwordItem(ModItemTier.SHADOW, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<ShadowSwordItem> SHADOW_SWORD = ITEMS.register("shadow_sword",
+			() -> new ShadowSwordItem(ModItemTier.SHADOW, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> SILVER_AXE = ITEMS.register("silver_axe", 
-			() -> new AxeItem(ModItemTier.SILVER, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SILVER_PICKAXE = ITEMS.register("silver_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SILVER_SHOVEL = ITEMS.register("silver_shovel", 
-			() -> new ShovelItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SILVER_SWORD = ITEMS.register("silver_sword", 
-			() -> new SwordItem(ModItemTier.SILVER, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SilverAxeItem> SILVER_AXE = ITEMS.register("silver_axe",
+			() -> new SilverAxeItem(ModItemTier.SILVER, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SilverPickaxeItem> SILVER_PICKAXE = ITEMS.register("silver_pickaxe",
+			() -> new SilverPickaxeItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SilverShovelItem> SILVER_SHOVEL = ITEMS.register("silver_shovel",
+			() -> new SilverShovelItem(ModItemTier.SILVER, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SilverSwordItem> SILVER_SWORD = ITEMS.register("silver_sword",
+			() -> new SilverSwordItem(ModItemTier.SILVER, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> SUNSTONE_AXE = ITEMS.register("sunstone_axe", 
-			() -> new AxeItem(ModItemTier.SUNSTONE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SUNSTONE_PICKAXE = ITEMS.register("sunstone_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SUNSTONE_SHOVEL = ITEMS.register("sunstone_shovel", 
-			() -> new ShovelItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> SUNSTONE_SWORD = ITEMS.register("sunstone_sword", 
-			() -> new SwordItem(ModItemTier.SUNSTONE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SunstoneAxeItem> SUNSTONE_AXE = ITEMS.register("sunstone_axe",
+			() -> new SunstoneAxeItem(ModItemTier.SUNSTONE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SunstonePickaxeItem> SUNSTONE_PICKAXE = ITEMS.register("sunstone_pickaxe",
+			() -> new SunstonePickaxeItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SunstoneShovelItem> SUNSTONE_SHOVEL = ITEMS.register("sunstone_shovel",
+			() -> new SunstoneShovelItem(ModItemTier.SUNSTONE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<SunstoneSwordItem> SUNSTONE_SWORD = ITEMS.register("sunstone_sword",
+			() -> new SunstoneSwordItem(ModItemTier.SUNSTONE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
-	public static final RegistryObject<Item> TURQUOISE_AXE = ITEMS.register("turquoise_axe", 
-			() -> new AxeItem(ModItemTier.TURQUOISE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> TURQUOISE_PICKAXE = ITEMS.register("turquoise_pickaxe", 
-			() -> new PickaxeItem(ModItemTier.TURQUOISE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> TURQUOISE_SHOVEL = ITEMS.register("turquoise_shovel", 
-			() -> new ShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
-	public static final RegistryObject<Item> TURQUOISE_SWORD = ITEMS.register("turquoise_sword", 
-			() -> new SwordItem(ModItemTier.TURQUOISE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<TurquoiseAxeItem> TURQUOISE_AXE = ITEMS.register("turquoise_axe",
+			() -> new TurquoiseAxeItem(ModItemTier.TURQUOISE, 5.0F, -3.1F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<TurquoisePickaxeItem> TURQUOISE_PICKAXE = ITEMS.register("turquoise_pickaxe",
+			() -> new TurquoisePickaxeItem(ModItemTier.TURQUOISE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<TurquoiseShovelItem> TURQUOISE_SHOVEL = ITEMS.register("turquoise_shovel",
+			() -> new TurquoiseShovelItem(ModItemTier.ALEXANDRITE, 4, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
+	public static final RegistryObject<TurquoiseSwordItem> TURQUOISE_SWORD = ITEMS.register("turquoise_sword",
+			() -> new TurquoiseSwordItem(ModItemTier.TURQUOISE, 6, -1.4F, (new Item.Properties()).tab(MoreOres.TOOLS)));
 	
 	
 	

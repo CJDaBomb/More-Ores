@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "block_state_property",
+          "block": "minecraft:iron_ore"
+        },
+        {
+          "condition": "block_state_property",
+          "block": "minecraft:gold_ore"
+        }
+      ]
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "item": "moreores:alexandrite_pickaxe"
+      }
+    }
+  ]
+}
+
